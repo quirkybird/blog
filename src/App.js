@@ -9,6 +9,7 @@ import Home from "./pages/Home"
 import Blog from "./pages/Blog"
 import FriendsLinks from "./pages/FriendsLinks"
 import NotFound from "./pages/NotFound"
+import QbMusic from "./pages/Music";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/home" element={<Home />} /> 
         <Route path="/blog" element={<Blog />} />
         <Route path="/friendsLinks" element={<FriendsLinks />} />
+        <Route path="/qbmusic" element={<QbMusic />} />
         <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

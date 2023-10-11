@@ -16,6 +16,10 @@ const Navigation = () => {
       title: "友链",
       path: "/friendsLinks",
     },
+    {
+      title: "播放器",
+      path: "/qbmusic"
+    }
   ];
   let [menuActive, setMenuActive] = useState(true)
   let [menuActiveStr, setMenuActiveStr] = useState(menuActive ? "left-0" : "-left-60")
