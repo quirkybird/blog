@@ -22,21 +22,21 @@ const Navigation = () => {
     }
   ];
   let [menuActive, setMenuActive] = useState(true)
-  let [menuActiveStr, setMenuActiveStr] = useState(menuActive ? "left-0" : "-left-60")
+  let [menuActiveStr, setMenuActiveStr] = useState(menuActive ? "left-0" : "-left-80")
   const  handleMenuClick = () => {
      setMenuActive(!menuActive)
   }
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    setMenuActiveStr(menuActiveStr = menuActive ? "left-0" : "-left-60")
+    setMenuActiveStr(menuActiveStr = menuActive ? "left-0" : "-left-80")
    }, [menuActive])
   
   return (
       <header>
       <nav className="flex justify-between px-10 py-5 items-start shadow-sm bg-white">
           <span className="text-3xl font-bold">quirkybird's blog </span>
-          <ul className={`flex flex-col mr-4 h-full font-bold  absolute top-20 bg-white lg:flex-row lg:static lg:items-center ${menuActiveStr} transition-all duration-300 ease-in-out`}>
+          <ul className={`flex flex-col mr-4 h-[calc(100vh-76px)] font-bold  absolute top-[76px] bg-white lg:flex-row lg:static lg:items-center lg:h-full ${menuActiveStr} transition-all duration-300 ease-in-out`}>
             {navLinks.map((link, index) => (
             <li className="px-10 py-3 pr-40 text-lg hover:text-blue-300 order-none lg:pr-20 lg:px-0 lg:py-0" key={index}>
               <Link to={link.path}>{link.title}</Link>
