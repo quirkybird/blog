@@ -16,6 +16,8 @@ function App() {
     <Router>
       <div className="App">
         <Navigation />
+        {/* 填充物 */}
+        <div className="w-full h-[76px]"></div>
         <Routes>
         <Route path="/" exact element={<Navigate replace to="/home" />} />
         <Route path="/home" element={<Home />} /> 
