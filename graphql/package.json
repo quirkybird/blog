@@ -1,0 +1,18 @@
+{
+  "name": "graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-koa": "^3.12.1",
+    "graphql-tools": "^9.0.0",
+    "koa": "^2.14.2",
+    "moment": "^2.29.4"
+  }
+}

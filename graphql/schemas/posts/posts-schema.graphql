@@ -1,0 +1,15 @@
+type Query {
+  recentPost: [Post]!
+}
+
+type Post {
+  id: Int,
+  title: String,
+  author: String,
+  categories: String,
+  tags: [String],
+  date: String,
+  desc: String,
+  link: String,
+  imafe: String
+}
