@@ -10,9 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@graphql-tools/schema": "^10.0.0",
     "apollo-server-koa": "^3.12.1",
-    "graphql-tools": "^9.0.0",
+    "dotenv": "^16.3.1",
     "koa": "^2.14.2",
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "mysql2": "^3.6.2"
   }
 }
