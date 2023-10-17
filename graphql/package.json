@@ -1,9 +1,10 @@
 {
   "name": "graphql",
   "version": "1.0.0",
-  "description": "",
+  "description": "基于ApolloServer与koa开发的后台服务",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "@graphql-tools/schema": "^10.0.0",
+    "@koa/bodyparser": "^5.0.0",
+    "@koa/router": "^11.0.2",
     "apollo-server-koa": "^3.12.1",
     "dotenv": "^16.3.1",
     "koa": "^2.14.2",
