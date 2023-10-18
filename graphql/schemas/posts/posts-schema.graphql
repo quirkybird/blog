@@ -7,9 +7,10 @@ type Post {
   title: String,
   author: String,
   categories: String,
-  tags: [String],
+  tags: String,
+  content: String
   date: String,
-  desc: String,
+  descr: String,
   link: String,
-  imafe: String
+  image: String
 }

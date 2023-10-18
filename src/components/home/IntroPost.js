@@ -8,7 +8,7 @@ const IntroPost = ({post}) => {
           <div className="w-full">
           <img className='rounded-md' src={require(`../../assets/images/${post.image}`)} alt={post.title} />
           </div>
-          <div><Tags tags={post.tags} /></div>
+          <div><Tags tags={JSON.parse(post.tags.toLowerCase())} /></div>
           <h2  className='text-xl font-bold'>{post.title}</h2>
           <div className='text-sm text-gray-500 font-semibold py-4'> 
             <span>作者: {post.author}</span>

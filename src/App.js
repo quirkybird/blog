@@ -10,7 +10,6 @@ import Blog from "./pages/Blog"
 import FriendsLinks from "./pages/FriendsLinks"
 import NotFound from "./pages/NotFound"
 import QbMusic from "./pages/Music";
-
 function App() {
   return (
     <Router>
