@@ -1,5 +1,7 @@
 type Query {
   recentPost: [Post]!
+  allPost: [Post]!
+  post(id: Int): [Post]!
 }
 
 type Post {

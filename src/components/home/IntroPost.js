@@ -14,7 +14,7 @@ const IntroPost = ({post}) => {
             <span>作者: {post.author}</span>
             <span>  -{post.date}</span>
           </div>
-          <p className='text-base font-semibold mb-4'>{post.desc}</p>
+          <p className='text-base font-semibold mb-4'>{post.descr}</p>
           <span className='text-blue-400'> 
             <Link to={post.link}>{">阅读全文"}</Link>
           </span>

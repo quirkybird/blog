@@ -21,7 +21,7 @@ const Navigation = () => {
       path: "/qbmusic"
     }
   ];
-  let [menuActive, setMenuActive] = useState(true)
+  let [menuActive, setMenuActive] = useState(false)
   let [menuActiveStr, setMenuActiveStr] = useState(menuActive ? "left-0" : "-left-80")
   const  handleMenuClick = () => {
      setMenuActive(!menuActive)
