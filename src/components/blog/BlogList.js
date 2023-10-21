@@ -1,21 +1,21 @@
 import { Link } from "react-router-dom";
 const BlogList = ({ posts }) => {
   return (
-    <section className="pt-6">
+    <ul>
       {posts.map((post, index) => (
-        <div key={index} className="flex justify-between py-2.5 px-[calc(25%)]">
-          <span>
-            {">"}
+        <li key={index} className="pb-2.5 sm:flex justify-between">
+          <h1>
+            <span>{">"}</span>
             <Link to={`/blog/${post.id}`}>
               <span className="pl-5 tracking-wider hover:text-blue-300">
                 {post.title}
               </span>
             </Link>
-          </span>
-          <span>{post.date}</span>
-        </div>
+          </h1>
+          <span className="pl-7 text-gray-500">{post.date}</span>
+        </li>
       ))}
-    </section>
+    </ul>
   );
 };
 

@@ -38,7 +38,7 @@ const Navigation = () => {
           <span className="text-3xl font-bold">quirkybird's blog </span>
           <ul className={`flex flex-col mr-4 h-[calc(100vh-76px)] font-bold  absolute top-[76px] bg-white lg:flex-row lg:static lg:items-center lg:h-full ${menuActiveStr} transition-all duration-300 ease-in-out`}>
             {navLinks.map((link, index) => (
-            <li className="px-10 py-3 pr-40 text-lg hover:text-blue-300 order-none lg:pr-20 lg:px-0 lg:py-0" key={index}>
+            <li className="px-10 py-3 pr-40 text-lg hover:text-blue-300 order-none lg:pr-20 lg:px-0 lg:py-0" key={index} onClick={handleMenuClick}>
               <Link to={link.path}>{link.title}</Link>
             </li>
             ))}
