@@ -1,21 +1,18 @@
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import {GET_POST_DETAIL} from "../utils/queryData"
+import TechBlog from "../components/blog/TechBlog";
 
 const BlogDetail = () => {
   let {id} = useParams()
   id = parseInt(id)
-  const {data} =  useQuery(GET_POST_DETAIL, {
+  const {data, loading} =  useQuery(GET_POST_DETAIL, {
     variables: { id }
   })
   const post = data?.post[0]
-  console.log(post)
+  if (loading) return <div>Loading...</div>;
   return ( 
-    <main>
-      <h1>{post?.title}</h1>
-      <section>{post?.date}</section>
-      <p>{post?.content}</p>
-    </main>
+    <TechBlog blog={post} />
    );
 }
  
