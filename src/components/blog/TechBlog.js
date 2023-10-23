@@ -1,5 +1,6 @@
 import Markdown from "react-markdown"
 import remarkGfm from "remark-gfm";
+import emoji from "remark-emoji"
 const TechBlog = ({ blog }) => {
   const tempMarkStr = `
   # :rocket:博客介绍
@@ -25,11 +26,10 @@ const TechBlog = ({ blog }) => {
       <article className="max-w-[900px] m-auto relative">
         <section className="text-center mt-24">
           <h1 className="text-3xl">{blog.title}</h1>
-          <span>发布日期: {blog.date}</span>
-          <span>观看人数: </span>
+          <span>{blog.date}</span>
         </section>
-        <p>
-          <Markdown remarkPlugins={[remarkGfm]}>
+        <p className="tracking-wider">
+          <Markdown remarkPlugins={[remarkGfm, emoji]}>
             {tempMarkStr}
           </Markdown>
         </p>

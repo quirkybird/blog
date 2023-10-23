@@ -2,7 +2,7 @@
 
 ## :sparkles:技术栈
 
-前端：react18，antd
+前端：react18，antd, tailwind  
 后端：koa，apollo，graphql，mysql
 
 ## :construction:功能介绍
