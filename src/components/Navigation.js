@@ -33,7 +33,7 @@ const Navigation = () => {
    }, [menuActive])
   
   return (
-      <header className='fixed left-0 right-0'>
+      <header className='fixed left-0 right-0 z-10'>
       <nav className="flex justify-between px-10 py-5 items-start shadow-sm bg-white">
           <span className="text-3xl font-bold">quirkybird's blog </span>
           <ul className={`flex flex-col mr-4 h-[calc(100vh-76px)] font-bold  absolute top-[76px] bg-white lg:flex-row lg:static lg:items-center lg:h-full ${menuActiveStr} transition-all duration-300 ease-in-out`}>
