@@ -11,7 +11,7 @@ const Mkd = ({ markdown }) => {
     hljs.highlightAll();
   }, []);
   return (
-    <section className="tracking-wider prose prose-s max-w-none p-10 prose-h2:text-[20px] prose-pre:bg-[#F6F6F6] prose-code:text-l prose-code:font-bold">
+    <section className="tracking-wider prose prose-lg max-w-none p-10 prose-h2:text-[20px] prose-pre:bg-[#F6F6F6] prose-code:text-lg prose-code:font-bold">
       <Markdown remarkPlugins={[remarkGfm, emoji]}>{markdown}</Markdown>
     </section>
   );

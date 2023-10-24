@@ -38,6 +38,8 @@ export const GET_POST_DETAIL = gql`
       date
       categories
       content
+      create_at
+      update_at
     }
   }
 `

@@ -14,5 +14,7 @@ type Post {
   date: String,
   descr: String,
   link: String,
-  image: String
+  image: String,
+  create_at: String,
+  update_at: String
 }

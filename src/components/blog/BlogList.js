@@ -12,7 +12,7 @@ const BlogList = ({ posts }) => {
               </span>
             </Link>
           </h1>
-          <span className="pl-7 text-gray-500">{post.date}</span>
+          <span className="pl-7 text-gray-500 shrink-0">{post.date}</span>
         </li>
       ))}
     </ul>
