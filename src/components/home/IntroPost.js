@@ -16,7 +16,7 @@ const IntroPost = ({post}) => {
           </div>
           <p className='text-base font-semibold mb-4'>{post.descr}</p>
           <span className='text-blue-400'> 
-            <Link to={post.link}>{">阅读全文"}</Link>
+            <Link to={`/blog/${post.id}`}>{">阅读全文"}</Link>
           </span>
         </div>
       }

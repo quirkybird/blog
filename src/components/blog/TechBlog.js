@@ -3,7 +3,7 @@ import Mkd from "./Mkd";
 const tempMarkStr = `
 在使用tailwindcss来动态绑定绑定类名时遇到了无法实现的情况，开始真是让人百思不得其解
 ## 想实现一个根据字段自动匹配颜色的标签
-信箱这不是很简单，\`switch\`来匹配识别\`tag\`字段并返回颜色，在tailwindcss的\`bg-[颜色值]\`自定义背景，拿捏！
+信箱这不是很简单，\`switch\`来匹配识别 \`tag\`字段并返回颜色，在tailwindcss的\`bg-[颜色值]\`自定义背景，拿捏！
 ![image.png](https://img1.imgtp.com/2023/10/24/c6XJePL1.png)
 它本身是我设定的一个react组件，代码如下  
 \`\`\`javascript
@@ -62,16 +62,14 @@ style={{ background: selectColor(tag) }}
 ~~~
 ## 感悟
 学习一个新的东西总会踩很多坑，之前从来没有记录过，踩过的坑还会重复踩，并且还会花费很多时间去重新搜索解决，小到一个类似的问题，大到一个项目架构和其它解决方案，还是要多学会总结与复盘啊，上面的情况就是我在搭建个人的博客中遇到的一个问题，趁着边搭建，边输出一些问题想法和解决措施，还能为博客搭建好后，没有文章可发的尴尬处境，建立一些基础。
-
-![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3fd04731f09443ce9d39f51b239e30fb~tplv-k3u1fbpfcp-watermark.image?)
 `
 
 const TechBlog = ({ blog }) => {
   return (
     <main className="h-[calc(100vh-76px)] overflow-auto">
       <article className="max-w-[900px] m-auto relative">
-        <section className="text-center mt-24">
-          <h1 className="text-2xl lg:text-3xl font-[800] mb-3">{blog.title}</h1>
+        <section className="text-center mt-20">
+          <h1 className="text-2xl lg:text-3xl font-[800] mb-3 px-5">{blog.title}</h1>
           <span>{blog.date}</span>
           <span> | 字数检测：{tempMarkStr.length}</span>
         </section>

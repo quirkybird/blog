@@ -14,7 +14,7 @@ const RencentPosts = ({name, posts}) => {
 
   return ( 
     <article>
-    <h2 className="text-2xl pt-10">{name}</h2>
+    <h2 className="text-2xl pt-10 px-5">{name}</h2>
     <div className="lg:flex flex-wrap justify-between">
       {paginatedPosts.map((post) => (
           <div key={post.id} className="lg:w-1/3">
