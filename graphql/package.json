@@ -11,10 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/server": "^4.9.5",
     "@graphql-tools/schema": "^10.0.0",
     "@koa/bodyparser": "^5.0.0",
     "@koa/router": "^11.0.2",
-    "apollo-server-koa": "^3.12.1",
     "dotenv": "^16.3.1",
     "koa": "^2.14.2",
     "moment": "^2.29.4",

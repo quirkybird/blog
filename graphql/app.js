@@ -1,4 +1,4 @@
-const {ApolloServer} = require("apollo-server-koa")
+const {ApolloServer} = require("@apollo/server/koa")
 const {makeExecutableSchema} = require("@graphql-tools/schema")
 const {typeDefs, resolvers}  = require("./schemas")
 

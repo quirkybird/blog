@@ -4,8 +4,8 @@ const InformalBlog = ({blog}) => {
   return ( 
     <main className="h-[calc(100vh-76px)] overflow-auto">
       <article className="max-w-[860px] m-auto relative">
-        <section className="mt-20 text-center md:text-start">
-          <h1 className="text-2xl lg:text-3xl font-[800] mb-3 px-5">{blog.title}</h1>
+        <section className="mt-20 text-center px-5 md:text-start">
+          <h1 className="text-2xl lg:text-3xl font-[800] mb-3">{blog.title}</h1>
           <span>{blog.date}</span>
           <span> | 字数检测：{blog.content.length}</span>
         </section>

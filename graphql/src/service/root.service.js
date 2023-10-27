@@ -3,13 +3,13 @@ const connection = require("../../database")
 const rootService = {
   // 获取最近文章
   getRecentPosts: async () => {
-    const sql = "select * from blog_posts limit 9 offset 0"
+    const sql = "select * from blog_posts order by create_at DESC limit 9 offset 0"
     const [recentPost] = await connection.execute(sql)
     return recentPost
   },
   // 获取全部文章
   getAllPosts: async () => {
-    const sql = "select * from blog_posts"
+    const sql = "select * from blog_posts order by create_at DESC"
     const [allPost] = await connection.execute(sql)
     return allPost
   },
