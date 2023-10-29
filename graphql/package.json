@@ -12,12 +12,16 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.9.5",
+    "@as-integrations/koa": "^1.1.1",
     "@graphql-tools/schema": "^10.0.0",
     "@koa/bodyparser": "^5.0.0",
+    "@koa/cors": "^4.0.0",
+    "@koa/multer": "^3.0.2",
     "@koa/router": "^11.0.2",
     "dotenv": "^16.3.1",
     "koa": "^2.14.2",
     "moment": "^2.29.4",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.6.2"
   }
 }

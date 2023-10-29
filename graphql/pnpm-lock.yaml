@@ -8,12 +8,18 @@ dependencies:
   '@apollo/server':
     specifier: ^4.9.5
     version: 4.9.5(graphql@16.8.1)
+  '@as-integrations/koa':
+    specifier: ^1.1.1
+    version: 1.1.1(@apollo/server@4.9.5)(koa@2.14.2)
   '@graphql-tools/schema':
     specifier: ^10.0.0
     version: 10.0.0(graphql@16.8.1)
   '@koa/bodyparser':
     specifier: ^5.0.0
     version: 5.0.0
+  '@koa/cors':
+    specifier: ^4.0.0
+    version: 4.0.0
   '@koa/router':
     specifier: ^11.0.2
     version: 11.0.2
@@ -212,6 +218,17 @@ packages:
     engines: {node: '>=14'}
     dev: false
 
+  /@as-integrations/koa@1.1.1(@apollo/server@4.9.5)(koa@2.14.2):
+    resolution: {integrity: sha512-v84cVhkLUxAH9l19pajbWp/Z9ZYTzO7jkAOiY1xndTclfpXZstiWDKejZYq7xpkBtUSSAKzNyM66uox8MP9qVg==}
+    engines: {node: '>=16.0'}
+    peerDependencies:
+      '@apollo/server': ^4.0.0
+      koa: ^2.0.0
+    dependencies:
+      '@apollo/server': 4.9.5(graphql@16.8.1)
+      koa: 2.14.2
+    dev: false
+
   /@graphql-tools/merge@8.4.2(graphql@16.8.1):
     resolution: {integrity: sha512-XbrHAaj8yDuINph+sAfuq3QCZ/tKblrTLOpirK0+CAgNlZUCHs0Fa+xtMUURgwCVThLle1AF7svJCxFizygLsw==}
     peerDependencies:
@@ -299,6 +316,13 @@ packages:
       co-body: 6.1.0
       lodash.merge: 4.6.2
       type-is: 1.6.18
+    dev: false
+
+  /@koa/cors@4.0.0:
+    resolution: {integrity: sha512-Y4RrbvGTlAaa04DBoPBWJqDR5gPj32OOz827ULXfgB1F7piD1MB/zwn8JR2LAnvdILhxUbXbkXGWuNVsFuVFCQ==}
+    engines: {node: '>= 14.0.0'}
+    dependencies:
+      vary: 1.1.2
     dev: false
 
   /@koa/router@11.0.2:
