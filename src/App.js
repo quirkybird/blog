@@ -11,6 +11,7 @@ import FriendsLinks from "./pages/FriendsLinks";
 import NotFound from "./pages/NotFound";
 import QbMusic from "./pages/Music";
 import BlogDetail from "./pages/BlogDetail";
+import NewBlog from "./pages/NewBlog";
 function App() {
   return (
     <Router>
@@ -25,6 +26,7 @@ function App() {
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/friendsLinks" element={<FriendsLinks />} />
           <Route path="/qbmusic" element={<QbMusic />} />
+          <Route path="/injectnewblog" element={<NewBlog />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

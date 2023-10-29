@@ -34,8 +34,8 @@ const Navigation = () => {
   
   return (
       <header className='fixed left-0 right-0 z-10'>
-      <nav className="flex justify-between px-3 lg:px-10 py-5 items-start shadow-sm bg-white">
-          <Link to="/"><span className="text-xl font-bold lg:text-3xl">quirkybird's blog</span></Link>
+      <nav className="flex justify-between items-center px-3 lg:px-10 py-5 shadow-sm bg-white">
+          <Link to="/"><span className="text-xl font-bold lg:text-2xl">quirkybird's blog</span></Link>
           <ul className={`flex flex-col mr-4 h-[calc(100vh-76px)] font-bold  absolute top-[68.35px] bg-white lg:flex-row lg:static lg:items-center lg:h-full ${menuActiveStr} transition-all duration-300 ease-in-out`}>
             {navLinks.map((link, index) => (
             <li className="px-10 py-3 pr-40 text-lg hover:text-blue-300 order-none lg:pr-20 lg:px-0 lg:py-0" key={index} onClick={handleMenuClick}>

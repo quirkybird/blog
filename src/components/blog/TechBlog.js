@@ -1,4 +1,4 @@
-import Mkd from "./Mkd";
+import Mkd from "../Mkd";
 
 const tempMarkStr = `
 在使用tailwindcss来动态绑定绑定类名时遇到了无法实现的情况，开始真是让人百思不得其解

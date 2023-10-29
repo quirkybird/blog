@@ -1,4 +1,4 @@
-import Mkd from "./Mkd";
+import Mkd from "../Mkd";
 const InformalBlog = ({blog}) => {
   const shadowInfo = "shadow-[rgba(100,100,111,0.2)_0px_7px_29px_0px]"
   return ( 
