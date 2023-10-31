@@ -43,3 +43,19 @@ export const GET_POST_DETAIL = gql`
     }
   }
 `
+
+// 查询所有友链
+export const GET_FRIEND_LINKS = gql`
+  query getFriendLinks {
+    friendlinks {
+      nickname
+      email
+      website_title
+      website_link
+      website_cover
+      website_desr
+      create_at
+      update_at
+    }
+  }
+`

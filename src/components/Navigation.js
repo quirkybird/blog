@@ -21,8 +21,12 @@ const Navigation = () => {
       path: "/qbmusic"
     }
   ];
+  // 导航栏的出现与否
   let [menuActive, setMenuActive] = useState(false)
+  // 导航栏垂直状态出现的tailwind字段设置
   let [menuActiveStr, setMenuActiveStr] = useState(menuActive ? "left-0" : "-left-80")
+  // 导航栏水平状态出现的tailwind字段设置
+  let [menuTopShow, setMenuTopShow] = useState("")
   const  handleMenuClick = () => {
      setMenuActive(!menuActive)
   }
@@ -30,10 +34,25 @@ const Navigation = () => {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     setMenuActiveStr(menuActiveStr = menuActive ? "left-0" : "-left-80")
+    // 滚动处理函数
+    const onScroll = () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      if(scrollTop >= 70) {
+        setMenuTopShow("-translate-y-[80px]")
+      } else {
+        setMenuTopShow("translate-y-0")
+      }
+    }
+    // 添加滚动监听
+    window.addEventListener("scroll", onScroll)
+    return () => {
+     setMenuTopShow("translate-y-0")
+     window.removeEventListener("scroll", onScroll)
+    }
    }, [menuActive])
   
   return (
-      <header className='fixed left-0 right-0 z-10'>
+      <header className={`fixed left-0 right-0 z-10 ${menuTopShow} transition-all duration-600 ease-in-out`}>
       <nav className="flex justify-between items-center px-3 lg:px-10 py-5 shadow-sm bg-white">
           <Link to="/"><span className="text-xl font-bold lg:text-2xl">quirkybird's blog</span></Link>
           <ul className={`flex flex-col mr-4 h-[calc(100vh-76px)] font-bold  absolute top-[68.35px] bg-white lg:flex-row lg:static lg:items-center lg:h-full ${menuActiveStr} transition-all duration-300 ease-in-out`}>

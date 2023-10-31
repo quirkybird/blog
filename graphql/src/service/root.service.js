@@ -18,7 +18,13 @@ const rootService = {
     const sql = "select * from blog_posts where id = ?"
     const [post] = await connection.execute(sql, [post_id])
     return post
-  }
+  },
+  // 获取友链
+  getFriendLinks: async () => {
+    const sql = "select * from blog_friendlinks order by create_at DESC"
+    const [friendLinks] = await connection.execute(sql)
+    return friendLinks
+  },
 }
 
 module.exports = rootService

@@ -2,6 +2,7 @@ type Query {
   recentPost: [Post]!
   allPost: [Post]!
   post(id: Int): [Post]!
+  friendlinks: [Links]!
 }
 
 type Post {
@@ -16,5 +17,17 @@ type Post {
   link: String,
   image: String,
   create_at: String,
+  update_at: String
+}
+
+type Links {
+  id: Int
+  nickname: String
+  email: String
+  website_title: String
+  website_link: String
+  website_cover: String
+  website_desr: String
+  create_at: String
   update_at: String
 }
