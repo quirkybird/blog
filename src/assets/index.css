@@ -15,3 +15,27 @@
    @apply bg-[#f8fafc];
   }
 }
+
+         
+/* 渐变按钮 */
+.btn-grad {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+  background-blend-mode: multiply,multiply;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;            
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.btn-grad:hover {
+  user-select: none;
+  cursor: pointer;
+  background-position: right center; 
+  text-decoration: none;
+}
+

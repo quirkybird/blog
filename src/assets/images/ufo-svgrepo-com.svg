@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 496 496" xml:space="preserve">
+<ellipse style="fill:#B3E529;" cx="248" cy="227.2" rx="72" ry="52"/>
+<path style="fill:#7BE22B;" d="M248,175.2c40,0,72,23.2,72,52c0,28.8-32,52-72,52"/>
+<path style="fill:#0C91C4;" d="M496,261.6c0,32.8-111.2,59.2-248,59.2S0,294.4,0,261.6s111.2-59.2,248-59.2
+	C384.8,201.6,496,228,496,261.6z"/>
+<g>
+	<path style="fill:#17B5E5;" d="M248,201.6c136.8,0,248,26.4,248,59.2"/>
+	<path style="fill:#17B5E5;" d="M0,261.6c0-32.8,111.2-59.2,248-59.2"/>
+</g>
+<path style="fill:#0977AF;" d="M496,261.6c0,32.8-111.2,59.2-248,59.2S0,294.4,0,261.6"/>
+<g>
+	<circle style="fill:#B3E529;" cx="48.8" cy="261.6" r="4"/>
+	<circle style="fill:#B3E529;" cx="92.8" cy="261.6" r="4"/>
+	<circle style="fill:#B3E529;" cx="137.6" cy="261.6" r="4"/>
+	<circle style="fill:#B3E529;" cx="181.6" cy="261.6" r="4"/>
+	<circle style="fill:#B3E529;" cx="225.6" cy="261.6" r="4"/>
+	<circle style="fill:#B3E529;" cx="270.4" cy="261.6" r="4"/>
+	<circle style="fill:#B3E529;" cx="314.4" cy="261.6" r="4"/>
+	<circle style="fill:#B3E529;" cx="358.4" cy="261.6" r="4"/>
+	<circle style="fill:#B3E529;" cx="403.2" cy="261.6" r="4"/>
+	<circle style="fill:#B3E529;" cx="447.2" cy="261.6" r="4"/>
+	<ellipse style="fill:#B3E529;" cx="248" cy="307.2" rx="65.6" ry="6.4"/>
+</g>
+</svg>
