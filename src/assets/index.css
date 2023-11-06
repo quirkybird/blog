@@ -39,3 +39,7 @@
   text-decoration: none;
 }
 
+/* 配置animate.css延迟时间 */
+.animate__animated.animate__jackInTheBox {
+  --animate-duration: 1s;
+}

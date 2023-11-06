@@ -17,11 +17,14 @@ const FriendsLinks = () => {
     </main>
   );
 };
+// 随机网站
 export const RandomWebsite = ({friendlinks}) => {
   const randomwebRef = useRef(null);
+  const infoCardRef = useRef(null)
   const [isUfoShow, setIsUfoShow] = useState(false)
   useEffect(() => {
     const randomweb = randomwebRef.current;
+    // 滚动到指定位置
     randomweb.scrollIntoView({
       behavior: "smooth",
       block: "start",
@@ -32,26 +35,46 @@ export const RandomWebsite = ({friendlinks}) => {
 
   const hanleEmitBtn = (e) => {
     setIsUfoShow(!isUfoShow)
+    // 延迟加载动画
+    const infoCard = infoCardRef.current
+    setTimeout(() => {
+      infoCard.style.transform = "translate(-50%, -50%)"
+    }, 7000);
   }
   return (
-    <div className="random-web h-4/5 relative mb-10" ref={randomwebRef}>
+    <div className="random-web h-4/5 relative mb-10 pt-10" ref={randomwebRef}>
       <span>随机进入一个坐标</span>
+      <p className="animate-typeing overflow-hidden whitespace-nowrap text-center text-2xl font-[500]">来自时光隧道的神秘坐标即将出现🌌</p>
       <div className="flex justify-center">
         {isUfoShow && 
         ( <div className="ufo animate-ufo -translate-y-[200px]">
-          <img src={ufo} alt="ufo" />
+            <img src={ufo} alt="ufo" className="z-10 relative" />
+            <div className="w-[180px] h-[42px] bg-[#4ade80] m-auto -translate-y-[85px]"></div>
+            <div
+            className="-translate-y-[120px] animate-ufo-light z-0 opacity-0" 
+            style=
+            {{
+            'width': "0",
+            'height': "0",
+            'borderLeft': "120px solid transparent", 
+            'borderRight': "120px solid transparent",
+            'borderBottom': "240px solid #86efac",
+            'boxShadow': `rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;`,
+            'borderRadius': "50%",
+            }}></div>
           </div>
         )}
         {
          isUfoShow || <div className="btn-grad absolute bottom-0" onClick={hanleEmitBtn}>发射一下</div>
         }
       </div>
-      <div className="absolute bottom-0 -translate-x-1/2 left-1/2">
+      <div ref={infoCardRef} className="absolute bottom-0 -translate-x-1/2 left-1/2 transition-transform">
         {isUfoShow && <InfoCard friendlinks = {friendlinks}/>}
       </div>
     </div>
   );
 };
+// 所有友链情况
 export const FriendCard = () => {
   return (
     <div className="h-1/2 bg-hole bg-contain bg-no-repeat bg-center">
@@ -60,11 +83,11 @@ export const FriendCard = () => {
     </div>
   );
 };
-
+// 友链信息卡片
 export const InfoCard = ({friendlinks}) => {
   return ( 
-    <div>
-      <a href={friendlinks.website_link} className="w-[360px] h-[180px] bg-pink-300 rounded-md shadow-xl text-center flex flex-col justify-evenly items-center">
+    <div className="animate__animated animate__jackInTheBox animate__delay-5s">
+      <a href={friendlinks.website_link} className="w-[360px] h-[180px] bg-[#a8a29e] rounded-md shadow-xl text-center flex flex-col justify-evenly items-center">
       <img src={friendlinks.website_cover} alt="网站图片" className="w-[64px] rounded-md" />
       <div>
         <span className="text-xl font-extralight">{friendlinks.website_title}</span>

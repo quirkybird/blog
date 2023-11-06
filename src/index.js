@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './assets/index.css';
+import 'animate.css' //导入动画库
 import App from './App';
 import {ApolloClient, InMemoryCache, ApolloProvider} from "@apollo/client"
 

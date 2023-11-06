@@ -20,6 +20,9 @@ dependencies:
   '@testing-library/user-event':
     specifier: ^13.5.0
     version: 13.5.0(@testing-library/dom@9.3.3)
+  animate.css:
+    specifier: ^4.1.1
+    version: 4.1.1
   antd:
     specifier: ^5.9.4
     version: 5.10.2(react-dom@18.2.0)(react@18.2.0)
@@ -3337,6 +3340,10 @@ packages:
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
       uri-js: 4.4.1
+    dev: false
+
+  /animate.css@4.1.1:
+    resolution: {integrity: sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==}
     dev: false
 
   /ansi-escapes@4.3.2:
