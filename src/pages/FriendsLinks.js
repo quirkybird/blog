@@ -44,7 +44,9 @@ export const RandomWebsite = ({friendlinks}) => {
   return (
     <div className="random-web h-4/5 relative mb-10 pt-10" ref={randomwebRef}>
       <span>随机进入一个坐标</span>
-      <p className="animate-typeing overflow-hidden whitespace-nowrap text-center text-2xl font-[500]">来自时光隧道的神秘坐标即将出现🌌</p>
+      <div className="flex justify-center items-center">
+        <p className="animate-typeing overflow-hidden whitespace-nowrap text-center text-2xl font-[500] border-r-2">来自时光隧道的神秘坐标即将出现🌌</p>
+      </div>
       <div className="flex justify-center">
         {isUfoShow && 
         ( <div className="ufo animate-ufo -translate-y-[200px]">
@@ -68,7 +70,7 @@ export const RandomWebsite = ({friendlinks}) => {
          isUfoShow || <div className="btn-grad absolute bottom-0" onClick={hanleEmitBtn}>发射一下</div>
         }
       </div>
-      <div ref={infoCardRef} className="absolute bottom-0 -translate-x-1/2 left-1/2 transition-transform">
+      <div ref={infoCardRef} className="absolute bottom-0 -translate-x-1/2 left-1/2 transition-transform hover:">
         {isUfoShow && <InfoCard friendlinks = {friendlinks}/>}
       </div>
     </div>

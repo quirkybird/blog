@@ -42,11 +42,11 @@ module.exports = {
         },
         grow: {
           "0%": { width: "0" },
-          "100%": { width: "100%" },
+          "100%": { width: "420px" },
         },
         blink: {
           "0%": {
-            "border-right-color": "rgb(137, 207, 247)",
+            "border-right-color": "#4ade80",
           },
           "100%": {
             "border-right-color": "#222",
