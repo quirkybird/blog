@@ -12,6 +12,9 @@ module.exports = {
         "ufo-light": "ufo-light-show 1s 4s ease-in-out",
         typeing: `grow 4s steps(44) 1s normal both, 
                     blink 0.5s steps(44) infinite normal`,
+        "wave-slow": "wave 6s linear infinite",
+        "wave-fast": "wave 3s linear infinite",
+        "breathe": "breathe 5s linear infinite"
       },
       keyframes: {
         "hole-rotate": {
@@ -52,6 +55,25 @@ module.exports = {
             "border-right-color": "#222",
           },
         },
+        wave: {
+          "0%": {
+            opacity: 1
+          },
+          "100%": {
+            "outline-offset": "300px",
+            "outline-offset": "300px",
+            opacity: 0
+          }
+        },
+        breathe: {
+          "0%, 100%": {
+            opacity: 1,
+          },
+          "50%": {
+            width: "400px",
+            height: "400px",
+          }
+        }
       },
     },
   },

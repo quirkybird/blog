@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Roboto Mono";
-  src: url("./font/RobotoMono-Medium.ttf");
+  font-family: "SourceHanSansCN";
+  src: url("./font/SourceHanSansSC-Regular-2.otf") format('opentype');
 }
 
 @layer base {
   html{
-   font-family: "Roboto Mono", system-ui,-apple-system,PingFang SC,"Microsoft YaHei",Segoe UI,Roboto,Helvetica,noto sans sc,hiragino sans gb,"sans-serif",Apple Color Emoji,Segoe UI Emoji,Not Color Emoji
+   font-family: "SourceHanSansCN", system-ui,-apple-system,PingFang SC,"Microsoft YaHei",Segoe UI,Roboto,Helvetica,noto sans sc,hiragino sans gb,"sans-serif",Apple Color Emoji,Segoe UI Emoji,Not Color Emoji
   }
   body {
-   @apply bg-[#f8fafc];
+   @apply bg-[#FCFCFC];
   }
 }
 
