@@ -30,4 +30,5 @@ type Links {
   website_desr: String
   create_at: String
   update_at: String
+  theme_color: String
 }

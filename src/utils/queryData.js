@@ -50,6 +50,7 @@ export const GET_FRIEND_LINKS = gql`
     friendlinks {
       nickname
       email
+      theme_color
       website_title
       website_link
       website_cover
