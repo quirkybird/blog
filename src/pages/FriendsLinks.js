@@ -17,8 +17,8 @@ const FriendsLinks = () => {
   // 所有数据
   const friendlinks = data.friendlinks;
   return (
-    <main className="bg-black overflow-auto">
-      <section className="w-full h-[calc(100vh-80px)] m-auto lg:w-[70vw] text-white">
+    <main className="bg-black">
+      <section className="w-full m-auto lg:w-[70vw] text-white">
         <RandomWebsite friendlink = {friendlink} themeColor = {themeColor} />
         <FriendCard friendlinks = {friendlinks} />
       </section>
@@ -26,7 +26,7 @@ const FriendsLinks = () => {
   );
 };
 // 随机网站
-export const RandomWebsite = ({friendlink, themeColor}) => {
+export const RandomWebsite = ({friendlink}) => {
   const randomwebRef = useRef(null);
   const infoCardRef = useRef(null)
   const [isUfoShow, setIsUfoShow] = useState(false)
@@ -56,11 +56,11 @@ export const RandomWebsite = ({friendlink, themeColor}) => {
     }
   }
   return (
-    <div className="random-web h-4/5 relative mb-10 pt-10" ref={randomwebRef}>
-      <span>随机进入一个坐标</span>
+    <div className="random-web h-[500px] relative mb-10 pt-10" ref={randomwebRef}>
+      <span className="text-lg">🌏 随机进入一个坐标</span>
       <div className="flex justify-center items-center">
         <p className="animate-typeing overflow-hidden whitespace-nowrap 
-        text-center text-2xl font-[500] border-r-2">来自时光隧道的神秘坐标即将出现🌌</p>
+        text-center text-2xl font-[600] border-r-2">来自时光隧道的神秘坐标即将出现🌌</p>
       </div>
       <div className="flex justify-center">
         {isUfoShow && 
@@ -82,39 +82,48 @@ export const RandomWebsite = ({friendlink, themeColor}) => {
           </div>
         )}
         {
-         isUfoShow || <div className="btn-grad absolute bottom-1/2" onClick={hanleEmitBtn}>接收信号</div>
+         isUfoShow || <div className="btn-grad absolute bottom-1/3" onClick={hanleEmitBtn}>接收信号</div>
         }
       </div> 
       <div ref={infoCardRef} className="absolute bottom-0 -translate-x-1/2 left-1/2 transition-all duration-500">
-          { isUfoShow &&  <InfoCard link = {friendlink} themeColor = {themeColor} />}
+          { isUfoShow &&  <InfoCard link = {friendlink} />}
       </div>
     </div>
   );
 };
 // 所有友链情况
 export const FriendCard = ({friendlinks}) => {
+
   // 给每个星球添加鼠标事件
   const starCenterRef = useRef(null)
   const [starInfo, setStarInfo] = useState(null)
   useEffect(() => {
     const starCenter = starCenterRef.current
+    // 获取星球元素（这里获取子组件的元素，按照react自顶向下的渲染方式，可以这样做）
     const stars = document.querySelectorAll('.star')
+    const onMouseenter = (star, index) => {
+      star.style.top = "302.6px"
+      star.style.left = "50%"
+      star.style.opacity = 0
+      star.style.zIndex = -1
+      starCenter.style.filter = "blur(0)"
+      setStarInfo(friendlinks[index])
+    }
     // 监听鼠标进入
     stars.forEach((star, index) => {
-      star.addEventListener("mouseover",(e) => {
-        star.style.top = "302.6px"
-        star.style.left = "50%"
-        star.style.opacity = 0
-        star.style.zIndex = -1
-        starCenter.style.filter = "blur(0)"
-        setStarInfo(friendlinks[index])
-      })
+      star.addEventListener("mouseenter",() => {onMouseenter(star, index)})
     })
-
+    return () => {
+      if(stars) {
+        stars.forEach((star, index) => {
+          star.removeEventListener("mouseenter", () => {onMouseenter(star, index)})
+        })
+      }
+    }
   }, [friendlinks])
   return (
-    <div className="h-full">
-      <p>遇见更多的人</p>
+    <div>
+      <p className="text-lg">👋 遇见更多的人</p>
       {/* 这里设置故意让其超出包含块所在的元素，达到预期定位效果 */}
       <ul className="relative">
       {friendlinks.map((friendlink, index) => (
@@ -122,25 +131,37 @@ export const FriendCard = ({friendlinks}) => {
       )
       )}
       </ul>
-      <div className="w-full h-full m-auto rounded-[50%] relative flex justify-center items-center">
-        <div className="animate-wave-slow w-[250px] h-[250px] rounded-[50%] outline-5 outline-purple-300 outline absolute"></div>
-        <div className="animate-wave-fast w-[200px] h-[200px] rounded-[50%] outline-5 outline-purple-300 outline absolute"></div>
-        <div className="animate-wave-slow w-[100px] h-[100px] rounded-[50%] outline-5 outline-purple-300 outline absolute"></div>
-        <div ref={starCenterRef} className="animate-breathe w-[300px] h-[300px] rounded-[50%] bg-purple-400 absolute blur">
-          <img className="w-full rounded-[50%]" src={starInfo?.website_cover} alt="" />
+      <div className="w-full h-[635px] m-auto rounded-[50%] relative flex justify-center items-center">
+        <div className="animate-wave-slow w-[250px] h-[250px] rounded-[50%] outline-5 outline absolute" style={{outlineColor: starInfo?.theme_color}}></div>
+        <div className="animate-wave-fast w-[200px] h-[200px] rounded-[50%] outline-5 outline absolute" style={{outlineColor: starInfo?.theme_color}}></div>
+        <div className="animate-wave-slow w-[100px] h-[100px] rounded-[50%] outline-5 outline absolute" style={{outlineColor: starInfo?.theme_color}}></div>
+        <div ref={starCenterRef} className=" w-[300px] h-[300px] rounded-[50%] bg-purple-400 absolute blur">
+          <a href={ starInfo?.website_link } className="relative">
+            <img className="w-full rounded-[50%]" src={starInfo?.website_cover} alt="" />
+            <div className="w-3/4 text-xl text-center absolute top-[20%] left-1/2 -translate-x-1/2">{ starInfo?.website_title }</div>
+            <div className="absolute text-center top-1/2">{ starInfo?.website_desr }</div>
+          </a>
         </div>
       </div>
     </div>
   );
 };
 // 友链信息卡片
-export const InfoCard = ({link, themeColor}) => {
-  const hover_boxShaow = `hover:shadow-[5px_5px_50px_15px_${themeColor}]`
+export const InfoCard = ({link}) => {
+  const themeColor = link.theme_color
+  const [hoverShadow, setHoverShadow] = useState({})
+  const handleMouseenter = () => {
+    // 设置阴影
+    setHoverShadow({boxShadow: `5px 5px 50px 15px ${themeColor}`})
+  }
+  const handleMouseleave = () => {
+    setHoverShadow({})
+  }
   return ( 
-    <div className={`mx-10 ${hover_boxShaow} animate__animated 
-      animate__jackInTheBox animate__delay-5s inline-block`}>
+    <div onMouseEnter = {handleMouseenter} onMouseLeave = {handleMouseleave} style={hoverShadow}
+      className= "mx-10 animate__animated animate__jackInTheBox animate__delay-5s inline-block">
       <a href={link.website_link} target="noreferrer" className="w-[360px] h-[180px]
-      rounded-md shadow-xl text-center flex flex-col justify-evenly items-center" style={{background: themeColor}}>
+      rounded-md shadow-xl text-center flex flex-col justify-evenly items-center" style={{background: link.theme_color}}>
       <img src={link.website_cover} alt="网站图片" className="w-[46px] rounded-md" />
       <div>
         <span className="text-xl font-extralight">{link.website_title}</span>
@@ -167,7 +188,8 @@ export const Stars = memo(({friendlink}) => {
 
   return ( 
     <a href={friendlink.website_link} className="star block w-[30px] h-[30px] rounded-[50%] bg-purple-300 absolute z-10
-        drop-shadow-[0_0_25px_#c084fc] blur-none outline-dotted outline-offset-4 outline-purple-400 transition-all duration-500" style={{left: left, top: top}}>
+        drop-shadow-[0_0_25px_#c084fc] blur-none outline-dotted outline-offset-4 transition-all duration-500" 
+        style={{left: left, top: top, outlineColor: friendlink.theme_color, filter: `drop-shadow(0 0 25px ${friendlink.theme_color})`}}>
         <img src={friendlink.website_cover} alt="cover" className="rounded-[50%]"/>
     </a>
    );
