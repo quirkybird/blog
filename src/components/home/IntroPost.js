@@ -3,7 +3,6 @@ import Tags from '../Tags'
 const IntroPost = ({post}) => {
   return ( 
     <section>
-      {
         <div className="post-intro-card px-5 pt-5">
           <div className="w-full">
           <img className='rounded-md' src={require(`../../assets/images/${post.image}`)} alt={post.title} />
@@ -19,7 +18,6 @@ const IntroPost = ({post}) => {
             <Link to={`/blog/${post.id}`}>{">阅读全文"}</Link>
           </span>
         </div>
-      }
     </section>
    );
 }

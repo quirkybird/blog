@@ -148,18 +148,13 @@ export const FriendCard = ({friendlinks}) => {
 };
 // 友链信息卡片
 export const InfoCard = ({link}) => {
-  const themeColor = link.theme_color
-  const [hoverShadow, setHoverShadow] = useState({})
-  const handleMouseenter = () => {
-    // 设置阴影
-    setHoverShadow({boxShadow: `5px 5px 50px 15px ${themeColor}`})
-  }
-  const handleMouseleave = () => {
-    setHoverShadow({})
-  }
+  // tailwind的特性，让我们很恼火，从StackOverflow我获得两种解决方案
+  // 在我自己的问题中 https://stackoverflow.com/questions/77460260/tailwind-dynamic-class-name-used-incorrectly/77467761#77467761
+
+  const hover_boxShadow =  `hover:shadow-[5px_5px_50px_15px_var(--color)]`;
   return ( 
-    <div onMouseEnter = {handleMouseenter} onMouseLeave = {handleMouseleave} style={hoverShadow}
-      className= "mx-10 animate__animated animate__jackInTheBox animate__delay-5s inline-block">
+    <div style = {{ '--color': link.theme_color }}
+      className= {`${hover_boxShadow} mx-10 animate__animated animate__jackInTheBox animate__delay-5s inline-block`}>
       <a href={link.website_link} target="noreferrer" className="w-[360px] h-[180px]
       rounded-md shadow-xl text-center flex flex-col justify-evenly items-center" style={{background: link.theme_color}}>
       <img src={link.website_cover} alt="网站图片" className="w-[46px] rounded-md" />

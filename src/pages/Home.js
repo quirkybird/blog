@@ -5,7 +5,7 @@ const Home = () => {
   
   const { data } = useQuery(GET_RECENT_POSTS);
   return (
-    <main className="w-full m-auto lg:w-[70vw]">
+    <main className="w-full m-auto lg:w-[70vw] py-5">
       {data && <RecentPosts name="近期文章" posts={data.recentPost} />}
     </main>
   );

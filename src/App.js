@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import QbMusic from "./pages/Music";
 import BlogDetail from "./pages/BlogDetail";
 import NewBlog from "./pages/NewBlog";
+import Footer from "./components/Footer";
 function App() {
   return (
     <Router>
@@ -29,6 +30,7 @@ function App() {
           <Route path="/injectnewblog" element={<NewBlog />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );
