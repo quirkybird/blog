@@ -3,10 +3,11 @@ import { GET_FRIEND_LINKS } from "../utils/queryData";
 import { useEffect, useRef, useState, memo } from "react";
 import getRandomNumber from "../utils/random"
 import ufo from "../assets/icon/ufo.svg"
-const FriendsLinks = () => {
+import Loading from "../components/Loding";
+const FriendsLinksDesktop = () => {
   // 获取友链数据
   const { data, error, loading } = useQuery(GET_FRIEND_LINKS);
-  if (loading) return "loading";
+  if (loading) return <Loading />;
   if (error) return error;
 
   // 随机友链
@@ -17,7 +18,7 @@ const FriendsLinks = () => {
   // 所有数据
   const friendlinks = data.friendlinks;
   return (
-    <main className="bg-black">
+    <main className="bg-black min-h-[calc(100vh-80px)]">
       <section className="w-full m-auto lg:w-[70vw] text-white">
         <RandomWebsite friendlink = {friendlink} themeColor = {themeColor} />
         <FriendCard friendlinks = {friendlinks} />
@@ -33,12 +34,12 @@ export const RandomWebsite = ({friendlink}) => {
   useEffect(() => {
     const randomweb = randomwebRef.current;
     // 滚动到指定位置
-    randomweb.scrollIntoView({
+    window.onload = randomweb.scrollIntoView({
       behavior: "smooth",
       block: "start",
       inline: "nearest",
     });
-
+    
   }, []);
 
   const hanleEmitBtn = (e) => {
@@ -60,7 +61,7 @@ export const RandomWebsite = ({friendlink}) => {
       <span className="text-lg">🌏 随机进入一个坐标</span>
       <div className="flex justify-center items-center">
         <p className="animate-typeing overflow-hidden whitespace-nowrap 
-        text-center text-2xl font-[600] border-r-2">来自时光隧道的神秘坐标即将出现🌌</p>
+        text-center lg:text-2xl font-[600] border-r-2">来自时光隧道的神秘坐标即将出现🌌</p>
       </div>
       <div className="flex justify-center">
         {isUfoShow && 
@@ -154,7 +155,7 @@ export const InfoCard = ({link}) => {
   const hover_boxShadow =  `hover:shadow-[5px_5px_50px_15px_var(--color)]`;
   return ( 
     <div style = {{ '--color': link.theme_color }}
-      className= {`${hover_boxShadow} mx-10 animate__animated animate__jackInTheBox animate__delay-5s inline-block`}>
+      className= {`${hover_boxShadow} rounded-md mx-10 animate__animated animate__jackInTheBox animate__delay-5s inline-block`}>
       <a href={link.website_link} target="noreferrer" className="w-[360px] h-[180px]
       rounded-md shadow-xl text-center flex flex-col justify-evenly items-center" style={{background: link.theme_color}}>
       <img src={link.website_cover} alt="网站图片" className="w-[46px] rounded-md" />
@@ -192,4 +193,4 @@ export const Stars = memo(({friendlink}) => {
  
 
 
-export default FriendsLinks;
+export default FriendsLinksDesktop;

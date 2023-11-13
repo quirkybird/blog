@@ -1,4 +1,5 @@
 import Mkd from "../Mkd";
+import Footer from "../Footer";
 const InformalBlog = ({blog}) => {
   const shadowInfo = "shadow-[rgba(100,100,111,0.2)_0px_7px_29px_0px]"
   return ( 
@@ -15,6 +16,7 @@ const InformalBlog = ({blog}) => {
         </div>
         <span>更新时间：{blog.update_at}</span>
       </article>
+      <Footer />
     </main>
    );
 }

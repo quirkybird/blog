@@ -60,8 +60,7 @@ module.exports = {
             opacity: 1
           },
           "100%": {
-            "outline-offset": "300px",
-            "outline-offset": "300px",
+           "outline-offset": "300px",
             opacity: 0
           }
         },

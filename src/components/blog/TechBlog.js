@@ -1,4 +1,5 @@
 import Mkd from "../Mkd";
+import Footer from "../Footer";
 
 const tempMarkStr = `
 在使用tailwindcss来动态绑定绑定类名时遇到了无法实现的情况，开始真是让人百思不得其解
@@ -76,6 +77,7 @@ const TechBlog = ({ blog }) => {
         {/* markdown组件，传入数据可以直接按照markdow渲染 */}
         <Mkd markdown={tempMarkStr} />
       </article>
+      <Footer />
     </main>
   );
 };
