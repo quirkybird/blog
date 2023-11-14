@@ -23,8 +23,6 @@ function App() {
   const deviceType = deviceTest()
   if(deviceType === "mobile") boo_user = true
   if(deviceType === "desktop") boo_user = false
-  // 判断是否加载页脚（文章我是手动自己添加页脚的，因为滚动元素不一样，所以需要这样做）
-  const isBlog = window.location.pathname.split("/")[1] === "blog"
   return (
     <Router>
       <div className="App">
@@ -44,8 +42,8 @@ function App() {
         </Routes>
         {/* 添加返回顶部按钮 */}
         <BackTop />
-        {/* 添加页脚 */}
-        {isBlog || <Footer />}
+        {/* 添加页脚  */}
+        <Footer />
       </div>
     </Router>
   );

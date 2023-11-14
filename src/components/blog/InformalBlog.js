@@ -1,9 +1,8 @@
 import Mkd from "../Mkd";
-import Footer from "../Footer";
 const InformalBlog = ({blog}) => {
   const shadowInfo = "shadow-[rgba(100,100,111,0.2)_0px_7px_29px_0px]"
   return ( 
-    <main className="h-[calc(100vh-76px)] overflow-auto">
+    <main className="min-h-[calc(100vh-76px)]">
       <article className="max-w-[860px] m-auto relative">
         <section className="mt-20 text-center px-5 md:text-start">
           <h1 className="text-2xl lg:text-3xl font-[800] mb-3">{blog.title}</h1>
@@ -16,7 +15,6 @@ const InformalBlog = ({blog}) => {
         </div>
         <span>更新时间：{blog.update_at}</span>
       </article>
-      <Footer />
     </main>
    );
 }
