@@ -1,3 +1,5 @@
+const https = require("https")
+const fs = require("fs")
 const { ApolloServer } = require("@apollo/server");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 const { typeDefs, resolvers } = require("./schemas");
@@ -21,11 +23,17 @@ server.start().then((res) => {
       context: async ({ ctx }) => ({ token: ctx.headers.token }),
     })
   );
-
+  //开启https服务 
+  // 签名配置
+  const options = {
+    key: fs.readFileSync("./SSL/key.pem"),
+    cert: fs.readFileSync("./SSL/cert.pem")
+  }
+  const httpsServer = https.createServer(options, app.callback())
   // 启动 Koa 实例，监听指定端口
-  app.listen({ port: PORT }, () => {
+  httpsServer.listen({ port: PORT }, () => {
     console.log(
-      `Server start at http://localhost:${PORT}`
+      `Server start at https://localhost:${PORT}`
     );
   });
 });
