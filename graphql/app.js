@@ -26,8 +26,8 @@ server.start().then((res) => {
   //开启https服务 
   // 签名配置
   const options = {
-    key: fs.readFileSync("./SSL/key.pem"),
-    cert: fs.readFileSync("./SSL/cert.pem")
+    key: fs.readFileSync("./SSL/private.key"),
+    cert: fs.readFileSync("./SSL/certificate.crt")
   }
   const httpsServer = https.createServer(options, app.callback())
   // 启动 Koa 实例，监听指定端口
