@@ -5,7 +5,7 @@ import Loading from "../components/Loding";
 const Home = () => {
   
   const { data, loading } = useQuery(GET_RECENT_POSTS);
-  if(loading) <Loading />
+  if(loading) return <Loading />
   return (
     <main className="w-full min-h-[100vh] m-auto lg:w-[70vw] py-5">
       {data && <RecentPosts name="近期文章" posts={data.recentPost} />}

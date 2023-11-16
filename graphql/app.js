@@ -9,7 +9,7 @@ const {koaMiddleware} = require("@as-integrations/koa")
 const app = require("./src/app");
 // 连接数据库
 require("./database");
-const PORT = 2333;
+const PORT = 443;
 
 // 创建 Apollo Server 实例，传入 schema
 const server = new ApolloServer({

@@ -19,6 +19,10 @@ const Navigation = () => {
     {
       title: "播放器",
       path: "/qbmusic"
+    },
+    {
+      title: "留言堆",
+      path: "/messagestack"
     }
   ];
   // 导航栏的出现与否

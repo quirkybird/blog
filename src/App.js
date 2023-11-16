@@ -13,6 +13,7 @@ import Blog from "./pages/Blog";
 import FriendsLinksDesktop from "./pages/FriendsLinksDesktop";
 // 移动端的友链
 import FriendsLinksPhone from "./pages/FriendsLinksPhone";
+import MessageStack from "./pages/MessageStack"
 import NotFound from "./pages/NotFound";
 import QbMusic from "./pages/Music";
 import BlogDetail from "./pages/BlogDetail";
@@ -37,6 +38,7 @@ function App() {
           {/* 根据设备类型来加载组件 */}
           <Route path="/friendsLinks" element={boo_user ? <FriendsLinksPhone /> : <FriendsLinksDesktop />} />
           <Route path="/qbmusic" element={<QbMusic />} />
+          <Route path="/messagestack" element={<MessageStack />} />
           <Route path="/injectnewblog" element={<NewBlog />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
