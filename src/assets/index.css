@@ -14,10 +14,30 @@
   body {
    @apply bg-[#FCFCFC];
   }
+ /* 定义滑块的宽度 */
+ ::-webkit-scrollbar {
+  width: 5px;
+  height: 10%;
+ }
+ /* 定义滚动条轨道的样式 */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* 设置轨道背景色 */
+}
+
+/* 定义滚动条滑块的样式 */
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* 设置滑块背景色 */
+  border-radius: 5px; /* 设置滑块圆角 */
+}
+
+/* 鼠标悬停在滚动条上时的样式 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* 设置滑块背景色 */
+}
 }
 
          
-/* 渐变按钮 */
+/* 渐变按钮 friendlinks */
 .btn-grad {
   background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
   background-blend-mode: multiply,multiply;
@@ -42,4 +62,30 @@
 /* 配置animate.css延迟时间 */
 .animate__animated.animate__jackInTheBox {
   --animate-duration: 1s;
+}
+
+
+/* 气泡样式 messagestack */
+.bubble {
+  width: 200px; 
+  height: 60px; 
+  line-height: 60px;
+  text-align: left;
+  padding-left: 10px;
+  border-radius: 20px; 
+  user-select: none; 
+  position: absolute;
+}
+.bubble::before {
+  display: block;
+  position: absolute;
+  left: 20px;
+  bottom: -18px;
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid pink;
+  border-bottom: 10px solid transparent;
 }

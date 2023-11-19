@@ -1,4 +1,11 @@
  // 获得固定闭区间随机数
+ /**
+  * 
+  * @param {Number} min 
+  * @param {Number} max 
+  * @param {Array} excludedRange 
+  * @returns Number
+  */
  const getRandomNumber = (min, max, excludedRange) => {
   let num;
   if(!excludedRange) 

@@ -29,7 +29,7 @@ function App() {
       <div className="App">
         <Navigation />
         {/* 填充物 */}
-        <div className="w-full h-[68.35px] lg:h-[76px]"></div>
+        <div className="w-full h-[68.35px] lg:h-[80px]"></div>
         <Routes>
           <Route path="/" exact element={<Navigate replace to="/home" />} />
           <Route path="/home" element={<Home />} />
