@@ -165,6 +165,7 @@ const Discuss = () => {
 
 export const Input = ({discussRef, engine}) => {
   const inputRef = useRef(null);
+  const [isShow, setIsShow] = useState("none")
   // message
   const [message, setMessage] = useState("")
     // 处理留言信息
@@ -187,34 +188,60 @@ export const Input = ({discussRef, engine}) => {
     let newBody = null
     let newText = null
     const handleKeyDown = (e) => {
+      let isLeaveMessage = true
       if(e.code === "Enter") {
-        newText = document.createElement("div")
-        newText.innerHTML = message
-        newText.className = "bubble" 
-        newText.style.cssText = `background: #a8a29e;`
-        discussRef.current.appendChild(newText)
-        newBody = Bodies.rectangle(window.innerWidth / 2, 60, 200, 60, {
-        angle: Math.PI / 180 * getRandomNumber(-45, 45)
-       })
-       Composite.add(engine.world, newBody)
-       if(newBody) {
-        (function rerender() {
-          render(newBody, newText)
-          requestAnimationFrame(rerender)
-        })()
-       }
+        // 使用cookie判断是否有权限留言
+        const cookiesArray = document.cookie.split(";")
+        cookiesArray.forEach((cookie, index) => {
+          cookie = cookie.trim().split("=");
+          if(cookie[0] === "permission") {
+            isLeaveMessage = false
+            window.alert("今天不能再留言了哦,一天留言一次")
+          }
+        })
+        if(isLeaveMessage) {
+          //设置一个cookie，用于记录被输入 
+          document.cookie = "permission=true; max-age=10"
+          newText = document.createElement("div")
+          newText.innerHTML = message
+          newText.className = "bubble" 
+          newText.style.cssText = `background: #a8a29e;`
+          discussRef.current.appendChild(newText)
+          newBody = Bodies.rectangle(window.innerWidth / 2, 60, 200, 60, {
+          angle: Math.PI / 180 * getRandomNumber(-45, 45)
+        })
+        Composite.add(engine.world, newBody)
+        if(newBody) {
+          (function rerender() {
+            render(newBody, newText)
+            requestAnimationFrame(rerender)
+          })()
+        }
+        }
       }
     }
 
+    const handleDoubleQ = (e) => {
+      const isShiftPressed = e.shiftKey;
+      const isKeyQPressed = e.code === "KeyQ"
+      if (isKeyQPressed && isShiftPressed) {
+        if(isShow === "block") setIsShow("none")
+        else setIsShow("block")
+      }
+     }
+
+    window.addEventListener("keydown", handleDoubleQ)
     input.addEventListener("keydown", handleKeyDown)
     return () => {
+      window.removeEventListener("keydown", handleDoubleQ)
       input.removeEventListener("keydown", handleKeyDown);
     }
   })
 
   return (
-    <div className="border-2 border-dashed border-slate-400 mx-40">
-      <input ref={inputRef} value={message} onChange={handleInput} type="text" className="outline-0 w-full" placeholder="/输入完按Enter留言" />
+    <div className="absolute z-10 w-1/2 border-slate-400 left-1/2 -translate-x-1/2 top-1/4">
+      {isShow === "none" && <span>shift + Q 就可以留言啦(☆▽☆)</span>}
+      <input style={{display: isShow}} ref={inputRef} value={message} onChange={handleInput} type="text" className="outline-0 w-full" placeholder="/输入完按Enter留言" />
     </div>
   )
 }
