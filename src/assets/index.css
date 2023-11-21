@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "SourceHanSansCN";
-  src: url("./font/SourceHanSansSC-Regular-2.otf") format('opentype');
+  src: url("./font//SourceHanSansSC.woff2") format('opentype');
 }
 
 @layer base {
@@ -75,6 +75,7 @@
   border-radius: 20px; 
   user-select: none; 
   position: absolute;
+  cursor: pointer;
 }
 .bubble::before {
   display: block;

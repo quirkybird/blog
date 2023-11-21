@@ -211,6 +211,8 @@ export const Input = ({discussRef, engine}) => {
           angle: Math.PI / 180 * getRandomNumber(-45, 45)
         })
         Composite.add(engine.world, newBody)
+        // 清空输入框
+        setMessage("")
         if(newBody) {
           (function rerender() {
             render(newBody, newText)
