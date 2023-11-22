@@ -6,7 +6,7 @@ import App from './App';
 import {ApolloClient, InMemoryCache, ApolloProvider} from "@apollo/client"
 
 const client = new ApolloClient({
-  uri: "https://localhost",
+  uri: "http://localhost:2333",
   cache: new InMemoryCache()
 })
 

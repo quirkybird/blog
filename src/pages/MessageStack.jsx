@@ -1,6 +1,7 @@
 import Matter from "matter-js";
 import { useEffect, useRef, useState } from "react";
 import getRandomNumber from "../utils/random";
+import getStaticImg from "../utils/getStaticImg";
 
   // 全局变量
   // 物理引擎
@@ -14,14 +15,6 @@ import getRandomNumber from "../utils/random";
   // 时间循环
   // const Runner = Matter.Runner; 使用requestAnimationFrame替代
 
-  const messages = ["站长恭喜建站成功", "今天天气真不错", "感觉这个留言堆好有意思",
-  "你是个垃圾我不再想和平", "我的生活我自己主宰", "我思故我在", "中华人民共和国万岁",
-  "毛泽东万岁", "金风雨露一相逢","便胜却人间无数",]
-
-const Discuss = () => {
-  const discussRef = useRef(null);
-  // 创建引擎
-  const engine = Engine.create();
   // 不包含滚动条的视口宽度
   const viewWidth = window.innerWidth - 5
   // 视口高度（减去顶框）
@@ -35,6 +28,58 @@ const Discuss = () => {
   const yellow = "#fcf0a4"
   const colors = [red, blue, pink, green, purple, yellow]
 
+  const messages = ["站长恭喜建站成功", "今天天气真不错", "感觉这个留言堆好有意思",
+  "你是个垃圾我不再想和平", "我的生活我自己主宰", "我思故我在", "中华人民共和国万岁",
+  "毛泽东万岁", "金风雨露一相逢","便胜却人间无数",]
+
+  // 创建气泡留言
+  const createBubbleMessage = (element, message) => {
+    // 为每个刚体添加上文字
+    const text = document.createElement("div")
+    text.className = "bubble" 
+    const randomColor = colors[getRandomNumber(0, 5)]
+    text.style.cssText = `background:${randomColor};`
+    text.innerHTML = message
+    element.appendChild(text)
+    // 设置css变量
+    text.style.setProperty("--before-color", randomColor)
+    // 给出掉落位置随机数
+    const randomPosition = getRandomNumber(1, 9)
+    const body = Bodies.rectangle(viewWidth * randomPosition * 0.1, 60, 200, 60, {
+      angle: Math.PI / 180 * getRandomNumber(-45, 45),
+      frictionAir: 0,
+      restitution: 0.2,
+      mass: 10,
+      });       
+    return { body, text }
+  }
+
+  // 创建图片留言 
+  const createImgMessage = async (element, url) => {
+    const img = await getStaticImg(url, element)
+    return new Promise((resolve) => {
+      img.onload = () => {
+        // 设置图片消息的css属性
+        img.addEventListener('dragstart', function(event) {
+          event.preventDefault();
+        });
+        img.style.position = "absolute"
+        const randomPosition = getRandomNumber(1, 9)
+        const body = Bodies.rectangle(viewWidth * randomPosition * 0.1, 60, img.width, img.height, {
+          angle: Math.PI / 180 * getRandomNumber(-45, 45),
+          frictionAir: 0,
+          restitution: 0.2,
+          mass: 10,
+          });  
+        resolve({body, img})
+      }
+    })
+ }
+const Discuss = () => {
+  const discussRef = useRef(null);
+  // 创建引擎
+  const engine = Engine.create();
+
   // 渲染函数
   const render = (bubbles) => {
     bubbles.forEach((bubble, index) => {
@@ -42,8 +87,8 @@ const Discuss = () => {
     const body = bubble.body
     // 将刚体和dom元素关联起来(很重要)
     const {x, y} = body.position
-    element.style.left = `${x - 100}px`
-    element.style.top = `${y - 30}px`
+    element.style.left = `${x - element.offsetWidth/2}px`
+    element.style.top = `${y - element.offsetHeight/2}px`
     element.style.transform = `rotate(${body.angle}rad)` //rad弧度单位，matter使用弧度角度
   })
 
@@ -52,51 +97,17 @@ const Discuss = () => {
     // 创建刚体元素
     // 矩形参数为x, y, w, h(x, y为元素中心点位置)
      const bubbles = messages.map((message, index) => {
-        // 为每个刚体添加上文字
-        const text = document.createElement("div")
-        text.className = "bubble" 
-        text.style.cssText = `background:${colors[getRandomNumber(0, 5)]};`
-        text.innerHTML = message
-        discussRef.current.appendChild(text)
-        // 给出掉落位置随机数
-        const randomPosition = getRandomNumber(1, 9)
-        const body = Bodies.rectangle(viewWidth * randomPosition * 0.1, 60, 200, 60, {
-          angle: Math.PI / 180 * getRandomNumber(-45, 45),
-          // frictionAir: 0,
-          // restitution: 0.5,
-          // mass: 5,
-          });          
-          Composite.add(engine.world, body)
-         return {text, body}
+        const {text, body} = createBubbleMessage(discussRef.current, message)
+        Composite.add(engine.world, body)
+        return {text, body}
           })
-
-    // // 圆形参数为x, y, r
-    // const boxB = Bodies.circle(viewWidth / 2 - 50, 80, 80, {
-    //   frictionAir:  0,
-    //   restitution: 1,
-    //   mass: 10
-    // });
-
-
-    // 创建一个堆
-    // const stack = Matter.Composites.stack(viewWidth /2 - 30, 0, 5, 5, 2, 6, (x, y) => {
-    //     return Matter.Bodies.rectangle(x, y, 100, 50, {
-    //       angle: Math.PI / 180 * 30,
-    //       restitution: 0.5,
-    //       mass: 5,
-          // chamfer: { radius: 10 },
-          // render: {
-          //   fillStyle: randomColor
-          // }
-    //     })
-    // })
 
     // 创建地面
     const ground = Bodies.rectangle(viewWidth / 2, viewHeight, viewWidth, 30, { 
       isStatic: true }
     );
     // 创建天花板
-    const ceiling = Bodies.rectangle(viewWidth / 2, 15, viewWidth, 30, { 
+    const ceiling = Bodies.rectangle(viewWidth / 2, 5, viewWidth, 10, { 
       isStatic: true }
     );
     // 创建左墙
@@ -116,19 +127,6 @@ const Discuss = () => {
     }
   )
 
-    // 创建渲染器，并将渲染器挂载到画布上
-    // const discuss = discussRef.current;
-    // 创建渲染器
-    // const render = Render.create({
-    //   element: discuss,
-    //   engine: engine,
-    //   options: {
-    //     width: viewWidth,
-    //     height: viewHeight,
-    //     wireframes: false, //关闭线框
-    //     background: "#FCFCFC"
-    //   },
-    // });
     // 创建一个鼠标约束
     const mouseConstraint = Matter.MouseConstraint.create(engine,{
       element: discussRef.current,
@@ -146,18 +144,11 @@ const Discuss = () => {
       Matter.Engine.update(engine);
       requestAnimationFrame(rerender);
     })();
-    // 执行渲染操作
-    // Render.run(render);
-
-    // 创建运行方法
-    // const runner = Runner.create();
-
-    // Runner.run(runner, engine);
     })
 
   return (
     <main className="min-h-[calc(100vh-80px)] relative">
-      <Input discussRef={discussRef} engine={engine}/>
+      <Input discussRef={discussRef} engine={engine} />
       <div ref={discussRef} className="w-full h-[calc(100vh-80px)] relative"></div>
     </main>
   )
@@ -180,14 +171,12 @@ export const Input = ({discussRef, engine}) => {
     const render = (body, element) => {
       // 将刚体和dom元素关联起来(很重要)
       const {x, y} = body.position
-      element.style.left = `${x - 100}px`
-      element.style.top = `${y - 30}px`
+      element.style.left = `${x - element.offsetWidth / 2}px`
+      element.style.top = `${y - element.offsetHeight / 2}px`
       element.style.transform = `rotate(${body.angle}rad)` //rad弧度单位，matter使用弧度角度
     }
 
-    let newBody = null
-    let newText = null
-    const handleKeyDown = (e) => {
+    const handleKeyDown = async (e) => {
       let isLeaveMessage = true
       if(e.code === "Enter") {
         // 使用cookie判断是否有权限留言
@@ -200,16 +189,19 @@ export const Input = ({discussRef, engine}) => {
           }
         })
         if(isLeaveMessage) {
-          //设置一个cookie，用于记录被输入 
-          document.cookie = "permission=true; max-age=10"
-          newText = document.createElement("div")
-          newText.innerHTML = message
-          newText.className = "bubble" 
-          newText.style.cssText = `background: #a8a29e;`
-          discussRef.current.appendChild(newText)
-          newBody = Bodies.rectangle(window.innerWidth / 2, 60, 200, 60, {
-          angle: Math.PI / 180 * getRandomNumber(-45, 45)
-        })
+        //设置一个cookie，用于记录被输入 
+        document.cookie = "permission=true; max-age=10"
+        let newBody = null
+        let newText = null
+        if(message.includes("https://") || message.includes("http://")) {
+          const { body, img } = await createImgMessage(discussRef.current, message)
+          newBody = body
+          newText = img
+        }else {
+        const {text, body} = createBubbleMessage(discussRef.current, message)
+          newBody = body
+          newText = text
+        }
         Composite.add(engine.world, newBody)
         // 清空输入框
         setMessage("")
@@ -243,7 +235,7 @@ export const Input = ({discussRef, engine}) => {
   return (
     <div className="absolute z-10 w-1/2 border-slate-400 left-1/2 -translate-x-1/2 top-1/4">
       {isShow === "none" && <span>shift + Q 就可以留言啦(☆▽☆)</span>}
-      <input style={{display: isShow}} ref={inputRef} value={message} onChange={handleInput} type="text" className="outline-0 w-full" placeholder="/输入完按Enter留言" />
+      <input style={{display: isShow}} ref={inputRef} value={message} onChange={handleInput} type="text" className="outline-2 outline-dashed outline-[#2d7cee] w-full" placeholder="/输入完按Enter留言" />
     </div>
   )
 }

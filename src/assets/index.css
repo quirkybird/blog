@@ -67,6 +67,7 @@
 
 /* 气泡样式 messagestack */
 .bubble {
+  --before-color: pink;
   width: 200px; 
   height: 60px; 
   line-height: 60px;
@@ -87,6 +88,7 @@
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid pink;
+  border-top: 10px solid var(--before-color);
+  /* 伪元素可以访问所在具体元素上的css变量 */
   border-bottom: 10px solid transparent;
 }
