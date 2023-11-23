@@ -2,7 +2,7 @@ import Matter from "matter-js";
 import { useEffect, useRef, useState } from "react";
 import getRandomNumber from "../utils/random";
 import getStaticImg from "../utils/getStaticImg";
-
+import {Alert} from "antd"
   // 全局变量
   // 物理引擎
   const Engine = Matter.Engine;
@@ -29,11 +29,12 @@ import getStaticImg from "../utils/getStaticImg";
   const colors = [red, blue, pink, green, purple, yellow]
 
   const messages = ["站长恭喜建站成功", "今天天气真不错", "感觉这个留言堆好有意思",
-  "你是个垃圾我不再想和平", "我的生活我自己主宰", "我思故我在", "中华人民共和国万岁",
-  "毛泽东万岁", "金风雨露一相逢","便胜却人间无数",]
+  "你是个垃圾我不再想和平", "我的生活我自己主宰", "我思故我在", "你这个留言堆就像是垃圾堆",
+  "那年好像在哪里见过你", "金风雨露一相逢","便胜却人间无数",]
 
   // 创建气泡留言
   const createBubbleMessage = (element, message) => {
+    const tips = "成功添加留言，欢迎经常来玩儿"
     // 为每个刚体添加上文字
     const text = document.createElement("div")
     text.className = "bubble" 
@@ -51,12 +52,13 @@ import getStaticImg from "../utils/getStaticImg";
       restitution: 0.2,
       mass: 10,
       });       
-    return { body, text }
+    return { body, text, tips }
   }
 
   // 创建图片留言 
   const createImgMessage = async (element, url) => {
-    const img = await getStaticImg(url, element)
+    const {img, tips} = await getStaticImg(url, element)
+    if(!img.src) return {body: null, img: null, tips: tips}
     return new Promise((resolve) => {
       img.onload = () => {
         // 设置图片消息的css属性
@@ -64,6 +66,10 @@ import getStaticImg from "../utils/getStaticImg";
           event.preventDefault();
         });
         img.style.position = "absolute"
+        // 限制最大图片尺寸
+        if(img.width >= 100) {
+          img.width = 100
+        }
         const randomPosition = getRandomNumber(1, 9)
         const body = Bodies.rectangle(viewWidth * randomPosition * 0.1, 60, img.width, img.height, {
           angle: Math.PI / 180 * getRandomNumber(-45, 45),
@@ -71,7 +77,7 @@ import getStaticImg from "../utils/getStaticImg";
           restitution: 0.2,
           mass: 10,
           });  
-        resolve({body, img})
+        resolve({body, img, tips})
       }
     })
  }
@@ -155,6 +161,10 @@ const Discuss = () => {
 }
 
 export const Input = ({discussRef, engine}) => {
+  // 是否成功留言
+  const [isSuccess, setIsSuccess] = useState(null)
+  // 提示信息
+  let [messageTips, setMessageTips] = useState("")
   const inputRef = useRef(null);
   const [isShow, setIsShow] = useState("none")
   // message
@@ -164,17 +174,18 @@ export const Input = ({discussRef, engine}) => {
     const input = inputRef.current
     setMessage(input.value)
   }
+
+  // 渲染函数
+  const render = (body, element) => {
+    // 将刚体和dom元素关联起来(很重要)
+    const {x, y} = body.position
+    element.style.left = `${x - element.offsetWidth / 2}px`
+    element.style.top = `${y - element.offsetHeight / 2}px`
+    element.style.transform = `rotate(${body.angle}rad)` //rad弧度单位，matter使用弧度角度
+  }
+
   useEffect(() => {
     const input = inputRef.current
-
-    // 渲染函数
-    const render = (body, element) => {
-      // 将刚体和dom元素关联起来(很重要)
-      const {x, y} = body.position
-      element.style.left = `${x - element.offsetWidth / 2}px`
-      element.style.top = `${y - element.offsetHeight / 2}px`
-      element.style.transform = `rotate(${body.angle}rad)` //rad弧度单位，matter使用弧度角度
-    }
 
     const handleKeyDown = async (e) => {
       let isLeaveMessage = true
@@ -189,27 +200,39 @@ export const Input = ({discussRef, engine}) => {
           }
         })
         if(isLeaveMessage) {
+        // 重置一下是否留言成功的值
+        setIsSuccess(null)
         //设置一个cookie，用于记录被输入 
-        document.cookie = "permission=true; max-age=10"
+        document.cookie = "permission=true; max-age=5"
         let newBody = null
         let newText = null
+        let newTips = null
         if(message.includes("https://") || message.includes("http://")) {
-          const { body, img } = await createImgMessage(discussRef.current, message)
+          const { body, img, tips } = await createImgMessage(discussRef.current, message)
           newBody = body
           newText = img
+          newTips = tips
         }else {
-        const {text, body} = createBubbleMessage(discussRef.current, message)
+        const {text, body, tips} = createBubbleMessage(discussRef.current, message)
           newBody = body
           newText = text
+          newTips = tips
         }
-        Composite.add(engine.world, newBody)
-        // 清空输入框
-        setMessage("")
+        setMessageTips(newTips)
         if(newBody) {
-          (function rerender() {
-            render(newBody, newText)
-            requestAnimationFrame(rerender)
-          })()
+        //设置为成功添加留言 
+        setIsSuccess(true);
+        // 清空输入框
+        setMessage("");
+        Composite.add(engine.world, newBody);
+        // 立即执行函数前面的语句必须使用分号（把我坑惨了）
+        (function rerender() {
+          render(newBody, newText)
+          requestAnimationFrame(rerender)
+        })()
+        } else {
+        //添加留言失败
+        setIsSuccess(false)
         }
         }
       }
@@ -235,7 +258,21 @@ export const Input = ({discussRef, engine}) => {
   return (
     <div className="absolute z-10 w-1/2 border-slate-400 left-1/2 -translate-x-1/2 top-1/4">
       {isShow === "none" && <span>shift + Q 就可以留言啦(☆▽☆)</span>}
-      <input style={{display: isShow}} ref={inputRef} value={message} onChange={handleInput} type="text" className="outline-2 outline-dashed outline-[#2d7cee] w-full" placeholder="/输入完按Enter留言" />
+      {isSuccess === true && 
+      <Alert
+      message={messageTips}
+      type="success"
+      showIcon
+      closable
+    />}
+      {isSuccess === false && 
+      <Alert
+      message={messageTips}
+      type="error"
+      showIcon
+      closable
+    />}
+      <input required style={{display: isShow}} ref={inputRef} value={message} onChange={handleInput} type="text" className="outline-2 outline-dashed outline-[#2d7cee] w-full" placeholder="/输入完按Enter留言" />
     </div>
   )
 }
