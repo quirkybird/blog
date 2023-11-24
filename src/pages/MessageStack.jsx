@@ -29,7 +29,7 @@ import {Alert} from "antd"
   const colors = [red, blue, pink, green, purple, yellow]
 
   const messages = ["站长恭喜建站成功", "今天天气真不错", "感觉这个留言堆好有意思",
-  "你是个垃圾我不再想和平", "我的生活我自己主宰", "我思故我在", "你这个留言堆就像是垃圾堆",
+  "你是个垃圾我不再想和平", "我的生活我自己主宰", "我思故我在", "好像合成大西瓜",
   "那年好像在哪里见过你", "金风雨露一相逢","便胜却人间无数",]
 
   // 创建气泡留言
@@ -102,7 +102,7 @@ const Discuss = () => {
   useEffect(() => {
     // 创建刚体元素
     // 矩形参数为x, y, w, h(x, y为元素中心点位置)
-     const bubbles = messages.map((message, index) => {
+    const bubbles = messages.map((message, index) => {
         const {text, body} = createBubbleMessage(discussRef.current, message)
         Composite.add(engine.world, body)
         return {text, body}
@@ -190,6 +190,12 @@ export const Input = ({discussRef, engine}) => {
     const handleKeyDown = async (e) => {
       let isLeaveMessage = true
       if(e.code === "Enter") {
+        // 对输入内容做一些限制
+        if(message === "" || message.length > 11) {
+          setIsSuccess(false)
+          setMessageTips("输入不符合规范哈")
+          return
+        }
         // 使用cookie判断是否有权限留言
         const cookiesArray = document.cookie.split(";")
         cookiesArray.forEach((cookie, index) => {
@@ -219,7 +225,7 @@ export const Input = ({discussRef, engine}) => {
           newTips = tips
         }
         setMessageTips(newTips)
-        if(newBody) {
+        if(newBody && newText) {
         //设置为成功添加留言 
         setIsSuccess(true);
         // 清空输入框
