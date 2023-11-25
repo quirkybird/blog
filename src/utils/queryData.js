@@ -60,3 +60,27 @@ export const GET_FRIEND_LINKS = gql`
     }
   }
 `
+
+// 创建留言
+export const CREATE_MESSAGE = gql`
+  mutation CreateMessage($message: String!) {
+    createMessage(message: $message) {
+      id
+      message
+      create_at
+      update_at
+    }
+  }
+`
+
+// 获取留言堆数据
+export const GET_MESSAGE_STACK = gql`
+  query getMessageStack {
+    messageStack {
+      id
+      message
+      create_at
+      update_at
+  }
+  }
+`

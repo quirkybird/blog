@@ -1,8 +1,11 @@
 import Matter from "matter-js";
 import { useEffect, useRef, useState } from "react";
+import { useMutation, useQuery } from "@apollo/client"; 
+import { CREATE_MESSAGE, GET_MESSAGE_STACK } from "../utils/queryData"
 import getRandomNumber from "../utils/random";
 import getStaticImg from "../utils/getStaticImg";
 import {Alert} from "antd"
+import Loading from "../components/Loading"
   // 全局变量
   // 物理引擎
   const Engine = Matter.Engine;
@@ -28,13 +31,13 @@ import {Alert} from "antd"
   const yellow = "#fcf0a4"
   const colors = [red, blue, pink, green, purple, yellow]
 
-  const messages = ["站长恭喜建站成功", "今天天气真不错", "感觉这个留言堆好有意思",
-  "你是个垃圾我不再想和平", "我的生活我自己主宰", "我思故我在", "好像合成大西瓜",
-  "那年好像在哪里见过你", "金风雨露一相逢","便胜却人间无数",]
-
   // 创建气泡留言
   const createBubbleMessage = (element, message) => {
     const tips = "成功添加留言，欢迎经常来玩儿"
+    // 对输入内容做一些限制
+    if(message === "" || message.length > 11) {
+      return {body: null, text: null, tips: "输入不符合规范哈"}
+      }
     // 为每个刚体添加上文字
     const text = document.createElement("div")
     text.className = "bubble" 
@@ -66,6 +69,7 @@ import {Alert} from "antd"
           event.preventDefault();
         });
         img.style.position = "absolute"
+        img.style.cursor = "pointer"
         // 限制最大图片尺寸
         if(img.width >= 100) {
           img.width = 100
@@ -81,11 +85,28 @@ import {Alert} from "antd"
       }
     })
  }
-const Discuss = () => {
+// 设置一个最高层组件来获取数据，往下传递
+const MessageStack = () => {
+  // 获取留言堆数据
+  const { data, error, loading } = useQuery(GET_MESSAGE_STACK)
+  if(loading) return <Loading />
+  return (
+    <Discuss messages = {data.messageStack} />
+  )
+}
+
+export const Discuss = ({ messages }) => {
   const discussRef = useRef(null);
   // 创建引擎
   const engine = Engine.create();
-
+  // // 设置界限
+  // const bounds = Matter.Bounds.create(
+  //   { x: 0, y: 0 }, 
+  //   { x: viewWidth, y: viewHeight }
+  // )
+  // engine.world.bounds = bounds
+  // engine.gravity.x = 1
+  // engine.gravity.y = 0
   // 渲染函数
   const render = (bubbles) => {
     bubbles.forEach((bubble, index) => {
@@ -102,8 +123,8 @@ const Discuss = () => {
   useEffect(() => {
     // 创建刚体元素
     // 矩形参数为x, y, w, h(x, y为元素中心点位置)
-    const bubbles = messages.map((message, index) => {
-        const {text, body} = createBubbleMessage(discussRef.current, message)
+    const bubbles = messages.map((messageObject, index) => {
+        const {text, body} = createBubbleMessage(discussRef.current, messageObject.message)
         Composite.add(engine.world, body)
         return {text, body}
           })
@@ -113,23 +134,17 @@ const Discuss = () => {
       isStatic: true }
     );
     // 创建天花板
-    const ceiling = Bodies.rectangle(viewWidth / 2, 5, viewWidth, 10, { 
+    const ceiling = Bodies.rectangle(viewWidth / 2, -100, viewWidth, 200, { 
       isStatic: true }
     );
     // 创建左墙
-    const leftWall = Bodies.rectangle(1, viewHeight / 2, 2, viewHeight, {
+    const leftWall = Bodies.rectangle(-100, viewHeight / 2, 200, viewHeight, {
         isStatic: true,
-        render: {
-          fillStyle: "#FCFCFC"
-        }
       }
     )
     // 创建右墙
-    const rightWall = Bodies.rectangle(viewWidth - 1, viewHeight / 2, 2, viewHeight, {
+    const rightWall = Bodies.rectangle(viewWidth + 100, viewHeight / 2, 200, viewHeight, {
       isStatic: true,
-      render: {
-        fillStyle: "#FCFCFC"
-      }
     }
   )
 
@@ -161,10 +176,15 @@ const Discuss = () => {
 }
 
 export const Input = ({discussRef, engine}) => {
+  //创建新的留言
+  const [createMessage, {data, loading, error}] = useMutation(CREATE_MESSAGE)
+
+  // 加载是否完成
+  const [isLoading, setIsLoading] = useState(false)
   // 是否成功留言
   const [isSuccess, setIsSuccess] = useState(null)
   // 提示信息
-  let [messageTips, setMessageTips] = useState("")
+  const [messageTips, setMessageTips] = useState("")
   const inputRef = useRef(null);
   const [isShow, setIsShow] = useState("none")
   // message
@@ -190,12 +210,6 @@ export const Input = ({discussRef, engine}) => {
     const handleKeyDown = async (e) => {
       let isLeaveMessage = true
       if(e.code === "Enter") {
-        // 对输入内容做一些限制
-        if(message === "" || message.length > 11) {
-          setIsSuccess(false)
-          setMessageTips("输入不符合规范哈")
-          return
-        }
         // 使用cookie判断是否有权限留言
         const cookiesArray = document.cookie.split(";")
         cookiesArray.forEach((cookie, index) => {
@@ -209,12 +223,14 @@ export const Input = ({discussRef, engine}) => {
         // 重置一下是否留言成功的值
         setIsSuccess(null)
         //设置一个cookie，用于记录被输入 
-        document.cookie = "permission=true; max-age=5"
+        document.cookie = `permission=true; expires=${new Date(new Date().getTime() + 50).toUTCString()};`
         let newBody = null
         let newText = null
         let newTips = null
         if(message.includes("https://") || message.includes("http://")) {
+          setIsLoading(true)
           const { body, img, tips } = await createImgMessage(discussRef.current, message)
+          setIsLoading(false)
           newBody = body
           newText = img
           newTips = tips
@@ -224,12 +240,20 @@ export const Input = ({discussRef, engine}) => {
           newText = text
           newTips = tips
         }
+        // 更新提示词语
         setMessageTips(newTips)
         if(newBody && newText) {
         //设置为成功添加留言 
         setIsSuccess(true);
         // 清空输入框
         setMessage("");
+        // 添加消息到数据库
+        createMessage({
+          variables:{
+           message
+          }
+        })
+        // 添加到物理世界
         Composite.add(engine.world, newBody);
         // 立即执行函数前面的语句必须使用分号（把我坑惨了）
         (function rerender() {
@@ -239,6 +263,8 @@ export const Input = ({discussRef, engine}) => {
         } else {
         //添加留言失败
         setIsSuccess(false)
+        const dateUTC = new Date(0).toUTCString()
+        document.cookie = `permission=; expires=${dateUTC}; path=/;`
         }
         }
       }
@@ -260,10 +286,10 @@ export const Input = ({discussRef, engine}) => {
       input.removeEventListener("keydown", handleKeyDown);
     }
   })
-
+//  if(loading) return <Loading />
   return (
     <div className="absolute z-10 w-1/2 border-slate-400 left-1/2 -translate-x-1/2 top-1/4">
-      {isShow === "none" && <span>shift + Q 就可以留言啦(☆▽☆)</span>}
+      {isShow === "none" && <span className="hidden lg:inline">Shift + Q 就可以留言啦(☆▽☆), 再按一次回到这里</span>}
       {isSuccess === true && 
       <Alert
       message={messageTips}
@@ -278,9 +304,10 @@ export const Input = ({discussRef, engine}) => {
       showIcon
       closable
     />}
-      <input required style={{display: isShow}} ref={inputRef} value={message} onChange={handleInput} type="text" className="outline-2 outline-dashed outline-[#2d7cee] w-full" placeholder="/输入完按Enter留言" />
+    {isLoading && <span>等等，玩命儿加载中.....</span>}
+      <input required style={{display: isShow}} ref={inputRef} value={message} onChange={handleInput} type="text" className="outline-2 outline-dashed outline-[#2d7cee] w-full" placeholder="/输入完按Enter留言, 试试http://或者https://输入图片" />
     </div>
   )
 }
 
-export default Discuss;
+export default MessageStack;

@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import RecentPosts from "../components/home/RecentPosts";
 import { GET_RECENT_POSTS } from "../utils/queryData";
-import Loading from "../components/Loding";
+import Loading from "../components/Loading";
 const Home = () => {
   
   const { data, loading } = useQuery(GET_RECENT_POSTS);

@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { GET_FRIEND_LINKS } from "../utils/queryData";
-import Loading from "../components/Loding";
+import Loading from "../components/Loading";
 const FriendsLinksPhone = () => {
   const { data, error, loading } = useQuery(GET_FRIEND_LINKS);
   if (loading) return <Loading />;

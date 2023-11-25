@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import BlogList from "../components/blog/BlogList";
 import {GET_ALL_POSTS} from "../utils/queryData"
-import Loading from "../components/Loding";
+import Loading from "../components/Loading";
 const Blog = () => {
   const {data, loading} = useQuery(GET_ALL_POSTS)
   if(loading) return <Loading /> 
