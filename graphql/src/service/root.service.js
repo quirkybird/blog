@@ -25,6 +25,21 @@ const rootService = {
     const [friendLinks] = await connection.execute(sql)
     return friendLinks
   },
+
+  // 创建留言
+  createMessage: async (message) => {
+    const insertsql = "insert into blog_messages(message) values(?)"
+    await connection.execute(insertsql, [message])
+    const querysql = "select * from blog_messages where message = ?"
+    const [res] = await connection.execute(querysql, [message])
+    return res[0]
+  },
+  // 查询留言堆所有内容
+  getMessageStack: async () => {
+    const sql = "select * from blog_messages"
+    const [res] = await connection.execute(sql)
+    return res
+  }
 }
 
 module.exports = rootService

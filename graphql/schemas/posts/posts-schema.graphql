@@ -3,8 +3,19 @@ type Query {
   allPost: [Post]!
   post(id: Int): [Post]!
   friendlinks: [Links]!
+  messageStack: [Message]!
 }
 
+type Mutation {
+  createMessage(message: String!): Message!
+}
+
+type Message {
+  id: ID!
+  message: String
+  create_at: String
+  update_at: String
+}
 type Post {
   id: Int,
   title: String,

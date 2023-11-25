@@ -40,7 +40,7 @@ server.start().then((res) => {
   // 启动 Koa 实例，监听指定端口
   httpServer.listen({ port: PORT }, () => {
     console.log(
-      `Server start at https://localhost:${PORT}`
+      `Server start at http://localhost:${PORT}`
     );
   });
 });
