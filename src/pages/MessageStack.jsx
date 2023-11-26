@@ -97,6 +97,7 @@ const MessageStack = () => {
 
 export const Discuss = ({ messages }) => {
   const discussRef = useRef(null);
+  const animationId = useRef(null);
   // 创建引擎
   const engine = Engine.create();
   // // 设置界限
@@ -109,9 +110,10 @@ export const Discuss = ({ messages }) => {
   // engine.gravity.y = 0
   // 渲染函数
   const render = (bubbles) => {
-    bubbles.forEach((bubble, index) => {
-    const element = bubble.text
-    const body = bubble.body
+    bubbles.forEach(async (bubble, index) => {
+    const fullfilledBubble = await bubble
+    const element = fullfilledBubble.text
+    const body = await fullfilledBubble.body
     // 将刚体和dom元素关联起来(很重要)
     const {x, y} = body.position
     element.style.left = `${x - element.offsetWidth/2}px`
@@ -123,8 +125,18 @@ export const Discuss = ({ messages }) => {
   useEffect(() => {
     // 创建刚体元素
     // 矩形参数为x, y, w, h(x, y为元素中心点位置)
-    const bubbles = messages.map((messageObject, index) => {
-        const {text, body} = createBubbleMessage(discussRef.current, messageObject.message)
+    let text = ""
+    let body = ""
+    const bubbles = messages.map(async (messageObject, index) => {
+        if(messageObject.message.includes("https://") || messageObject.message.includes("http://")) {
+        const {img, body: newBody} = await createImgMessage(discussRef.current, messageObject.message)
+          text = img
+          body = newBody
+        } else {
+        const {text: newText, body: newBody} = createBubbleMessage(discussRef.current, messageObject.message)
+          text = newText
+          body = newBody
+        }
         Composite.add(engine.world, body)
         return {text, body}
           })
@@ -160,11 +172,20 @@ export const Discuss = ({ messages }) => {
     Composite.add(engine.world, [ceiling, ground, leftWall, rightWall, mouseConstraint]);
 
     // 使用新的渲染方法
-    (function rerender() {
+    function rerender() {
       render(bubbles)
       Matter.Engine.update(engine);
-      requestAnimationFrame(rerender);
-    })();
+      animationId.current = requestAnimationFrame(rerender);
+    }
+    // 启动渲染
+    rerender()
+
+    return () => {
+      if(animationId) {
+        cancelAnimationFrame(animationId.current)
+        Matter.Engine.clear(engine);
+      }
+    }
     })
 
   return (
@@ -205,6 +226,8 @@ export const Input = ({discussRef, engine}) => {
   }
 
   useEffect(() => {
+    // 设置一个动画帧ID
+    let animationId = null
     const input = inputRef.current
 
     const handleKeyDown = async (e) => {
@@ -223,7 +246,7 @@ export const Input = ({discussRef, engine}) => {
         // 重置一下是否留言成功的值
         setIsSuccess(null)
         //设置一个cookie，用于记录被输入 
-        document.cookie = `permission=true; expires=${new Date(new Date().getTime() + 50).toUTCString()};`
+        document.cookie = `permission=true; expires=${new Date(new Date().getTime() + 86400000).toUTCString()};`
         let newBody = null
         let newText = null
         let newTips = null
@@ -256,10 +279,12 @@ export const Input = ({discussRef, engine}) => {
         // 添加到物理世界
         Composite.add(engine.world, newBody);
         // 立即执行函数前面的语句必须使用分号（把我坑惨了）
-        (function rerender() {
+        function rerender() {
           render(newBody, newText)
           requestAnimationFrame(rerender)
-        })()
+        }
+        // 启动渲染
+        rerender()
         } else {
         //添加留言失败
         setIsSuccess(false)
@@ -282,6 +307,7 @@ export const Input = ({discussRef, engine}) => {
     window.addEventListener("keydown", handleDoubleQ)
     input.addEventListener("keydown", handleKeyDown)
     return () => {
+      if(animationId) cancelAnimationFrame(animationId)
       window.removeEventListener("keydown", handleDoubleQ)
       input.removeEventListener("keydown", handleKeyDown);
     }
