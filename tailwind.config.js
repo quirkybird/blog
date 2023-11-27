@@ -14,7 +14,7 @@ module.exports = {
                     blink 0.5s steps(44) infinite normal`,
         "wave-slow": "wave 6s linear infinite",
         "wave-fast": "wave 3s linear infinite",
-        "breathe": "breathe 5s linear infinite"
+        "breathe": "breathe 5s linear infinite",
       },
       keyframes: {
         "hole-rotate": {

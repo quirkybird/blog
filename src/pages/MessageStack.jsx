@@ -51,6 +51,7 @@ import Loading from "../components/Loading"
     const randomPosition = getRandomNumber(1, 9)
     const body = Bodies.rectangle(viewWidth * randomPosition * 0.1, 60, 200, 60, {
       angle: Math.PI / 180 * getRandomNumber(-45, 45),
+      chamfer: { radius: 20 },
       frictionAir: 0,
       restitution: 0.2,
       mass: 10,

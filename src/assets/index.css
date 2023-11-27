@@ -6,10 +6,17 @@
   font-family: "SourceHanSansCN";
   src: url("./font//SourceHanSansSC.woff2") format('opentype');
 }
+@font-face {
+  font-family: "SF";
+  src: url("../assets//font//sf-pro-icons_regular.woff2") format('woff2');
+}
 
 @layer base {
   html{
    font-family: "SourceHanSansCN", system-ui,-apple-system,PingFang SC,"Microsoft YaHei",Segoe UI,Roboto,Helvetica,noto sans sc,hiragino sans gb,"sans-serif",Apple Color Emoji,Segoe UI Emoji,Not Color Emoji
+  }
+  .intro {
+    font-family: "SF", system-ui;
   }
   body {
    @apply bg-[#FCFCFC];
