@@ -8,6 +8,7 @@ import "highlight.js/styles/stackoverflow-light.css";
 
 const Mkd = ({ markdown }) => {
   useEffect(() => {
+    window.scrollTo(0, 0)
     hljs.highlightAll();
   }, []);
   return (
