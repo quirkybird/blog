@@ -10,7 +10,7 @@ const UploadFile = () => {
       const file = fileInputRef.files[0];
       const formData = new FormData();
       formData.append("image", file);
-      const res = await fetch("http://localhost:2333/upload-image", {
+      const res = await fetch("https://server.yamorz.top/upload-image", {
         method: "POST",
         body: formData
       });

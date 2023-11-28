@@ -190,7 +190,7 @@ export const Discuss = ({ messages }) => {
     })
 
   return (
-    <main className="min-h-[calc(100vh-80px)] relative">
+    <main className="min-h-[calc(100vh-80px)] relative overflow-hidden">
       <Input discussRef={discussRef} engine={engine} />
       <div ref={discussRef} className="w-full h-[calc(100vh-80px)] relative"></div>
     </main>
@@ -331,7 +331,7 @@ export const Input = ({discussRef, engine}) => {
       showIcon
       closable
     />}
-    {isLoading && <span>等等，玩命儿加载中.....</span>}
+    {loading && <span>等等，玩命儿加载中.....</span>}
       <input required style={{display: isShow}} ref={inputRef} value={message} onChange={handleInput} type="text" className="outline-2 outline-dashed outline-[#2d7cee] w-full" placeholder="/输入完按Enter留言, 试试http://或者https://输入图片" />
     </div>
   )
