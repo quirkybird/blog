@@ -11,7 +11,7 @@ const Footer = () => {
               <a href="https://icp.gov.moe/?keyword=20236776" target="_blank" rel="noopener noreferrer">萌ICP备20236776号</a>
           </div>
         </div>
-        <div className="self-end p-5">
+        <div className="self-end p-2">
           <PoweredByVercel target="_blank" rel="noopener noreferrer" />
         </div>
       </div>
