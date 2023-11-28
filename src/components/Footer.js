@@ -3,7 +3,7 @@ const Footer = () => {
   return (
     <footer className="p-5 w-full shadow-[rgba(0,0,0,0.1)_0px_10px_50px]">
       <div className="lg:w-[70vw] flex sm:justify-between justify-center flex-wrap items-center m-auto">
-        <div className="flex items-center text-[12px]">
+        <div className="flex items-center text-[12px] lg:text-base">
           <div className="whitespace-nowarp shrink-0">{`© ${new Date().getFullYear()} quirkybird 版权所有`}
           </div>
           <div className="flex lg:ml-5 ml-3 items-center">
