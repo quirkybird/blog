@@ -12,8 +12,8 @@ const BlogDetail = () => {
   const {data, loading} =  useQuery(GET_POST_DETAIL, {
     variables: { id }
   })
-  const post = data?.post[0]
   if (loading) return <Loading />;
+  const post = data.post[0]
   // 设置网站标题 title
   document.title = post.title
   return ( 
