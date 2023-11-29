@@ -6,6 +6,7 @@ import getRandomNumber from "../utils/random";
 import getStaticImg from "../utils/getStaticImg";
 import {Alert} from "antd"
 import Loading from "../components/Loading"
+import deviceTest from "../utils/deviceTest";
   // 全局变量
   // 物理引擎
   const Engine = Matter.Engine;
@@ -72,7 +73,11 @@ import Loading from "../components/Loading"
         img.style.position = "absolute"
         img.style.cursor = "pointer"
         // 限制最大图片尺寸
-        if(img.width >= 100) {
+        if(img.width >= 300) {
+          img.width = 300
+        } else if(img.width >= 200) {
+          img.width = 200
+        } else if(img.width >= 100) {
           img.width = 100
         }
         const randomPosition = getRandomNumber(1, 9)
@@ -113,6 +118,7 @@ export const Discuss = ({ messages }) => {
   const render = (bubbles) => {
     bubbles.forEach(async (bubble, index) => {
     const fullfilledBubble = await bubble
+    if(!fullfilledBubble) return
     const element = fullfilledBubble.text
     const body = await fullfilledBubble.body
     // 将刚体和dom元素关联起来(很重要)
@@ -126,10 +132,10 @@ export const Discuss = ({ messages }) => {
   useEffect(() => {
     // 创建刚体元素
     // 矩形参数为x, y, w, h(x, y为元素中心点位置)
-    let text = ""
-    let body = ""
+    let text = null
+    let body = null
     const bubbles = messages.map(async (messageObject, index) => {
-        if(messageObject.message.includes("https://") || messageObject.message.includes("http://")) {
+        if(deviceTest() === "desktop" && (messageObject.message.includes("https://") || messageObject.message.includes("http://"))) {
         const {img, body: newBody} = await createImgMessage(discussRef.current, messageObject.message)
           text = img
           body = newBody
@@ -138,6 +144,7 @@ export const Discuss = ({ messages }) => {
           text = newText
           body = newBody
         }
+        if(!text || !body) return false
         Composite.add(engine.world, body)
         return {text, body}
           })
@@ -200,9 +207,6 @@ export const Discuss = ({ messages }) => {
 export const Input = ({discussRef, engine}) => {
   //创建新的留言
   const [createMessage, {data, loading, error}] = useMutation(CREATE_MESSAGE)
-
-  // 加载是否完成
-  const [isLoading, setIsLoading] = useState(false)
   // 是否成功留言
   const [isSuccess, setIsSuccess] = useState(null)
   // 提示信息
@@ -252,9 +256,7 @@ export const Input = ({discussRef, engine}) => {
         let newText = null
         let newTips = null
         if(message.includes("https://") || message.includes("http://")) {
-          setIsLoading(true)
           const { body, img, tips } = await createImgMessage(discussRef.current, message)
-          setIsLoading(false)
           newBody = body
           newText = img
           newTips = tips
@@ -331,7 +333,7 @@ export const Input = ({discussRef, engine}) => {
       showIcon
       closable
     />}
-    {loading && <span>等等，玩命儿加载中.....</span>}
+      {loading && <span>等等，玩命儿加载中.....</span>}
       <input required style={{display: isShow}} ref={inputRef} value={message} onChange={handleInput} type="text" className="outline-2 outline-dashed outline-[#2d7cee] w-full" placeholder="/输入完按Enter留言, 试试http://或者https://输入图片" />
     </div>
   )

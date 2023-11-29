@@ -34,6 +34,11 @@ const Navigation = () => {
   const  handleMenuClick = () => {
      setMenuActive(!menuActive)
   }
+  // 记录当前点击页面索引
+  // 这样做显然是有问题的，比如手动输入地址时，标题不会改变
+  const handleClick = (title) => {
+    document.title = title
+  }
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,7 +67,7 @@ const Navigation = () => {
           <ul className={`flex flex-col mr-4 h-[calc(100vh-68.35px)] font-bold  absolute top-[68.35px] bg-white lg:flex-row lg:static lg:items-center lg:h-full ${menuActiveStr} transition-all duration-300 ease-in-out`}>
             {navLinks.map((link, index) => (
             <li className="px-10 py-3 pr-40 text-lg hover:text-blue-300 order-none lg:pr-20 lg:px-0 lg:py-0" key={index} onClick={handleMenuClick}>
-              <Link to={link.path}>{link.title}</Link>
+              <Link to={link.path} onClick={() => {handleClick(link.title)}}>{link.title}</Link>
             </li>
             ))}
             <span className="order-first pl-8 lg:order-last lg:p-0">
