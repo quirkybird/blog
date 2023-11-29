@@ -11,7 +11,7 @@ const { ApolloServerPluginDrainHttpServer } = require("@apollo/server/plugin/dra
 const app = require("./src/app");
 // 连接数据库
 require("./database");
-const PORT = 2333;
+const PORT = 80;
 
 //开启https服务 
 // 签名配置

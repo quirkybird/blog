@@ -1,5 +1,6 @@
 const connection = require("../../database");
-
+const fs = require("fs")
+const path = require("path")
 const rootService = {
   // 获取最近文章
   getRecentPosts: async () => {
@@ -18,7 +19,13 @@ const rootService = {
   getPostById: async (post_id) => {
     const sql = "select * from blog_posts where id = ?";
     const [post] = await connection.execute(sql, [post_id]);
-    return post;
+    // 将content从文件名称换为文件具体内容
+    try {
+      post[0].content =  fs.readFileSync(path.join("uploads/blog", `${post[0].content}.md`), "utf-8");
+      return post;
+    } catch (error) {
+      console.log(error)
+    }
   },
   // 获取友链
   getFriendLinks: async () => {
