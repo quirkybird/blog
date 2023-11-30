@@ -8,6 +8,11 @@ type Query {
 
 type Mutation {
   createMessage(message: String!): Message!
+  createNewPost(post: UploadPost!): UploadMessage!
+}
+
+type UploadMessage{
+  message: String!
 }
 
 type Message {
@@ -16,6 +21,17 @@ type Message {
   create_at: String
   update_at: String
 }
+
+input UploadPost {
+  title: String
+  author: String
+  categories: String
+  tags: String
+  content: String
+  descr: String
+  image: String
+}
+
 type Post {
   id: Int,
   title: String,

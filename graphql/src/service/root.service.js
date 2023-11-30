@@ -48,6 +48,19 @@ const rootService = {
     const [res] = await connection.execute(sql);
     return res;
   },
+
+  // 上传文章
+  createNewPost: async ({title, author, categories, tags, content, descr, image}) => {
+    const sql = `insert into blog_posts(title, author, categories, tags, content, descr, image)
+                values(?, ?, ?, ?, ?, ?, ?)`
+    try {
+      await connection.execute(sql, [title, author, categories, tags, content, descr, image])
+      return {message: "文件已经成功上传"}
+    } catch (error) {
+      return {message: error.message}
+    }
+    
+    }
 };
 
 module.exports = rootService;

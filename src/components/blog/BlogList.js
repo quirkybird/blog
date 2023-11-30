@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import formatDate from "../../utils/formatDate"
 const BlogList = ({ posts }) => {
   return (
     <ul>
@@ -12,7 +13,7 @@ const BlogList = ({ posts }) => {
               </span>
             </Link>
           </h1>
-          <span className="pl-7 text-gray-500 shrink-0">{post.date}</span>
+          <span className="pl-7 text-gray-500 shrink-0">{formatDate(post.create_at)}</span>
         </li>
       ))}
     </ul>

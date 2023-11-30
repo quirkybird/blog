@@ -5,7 +5,7 @@ const IntroPost = ({post}) => {
     <section>
         <div className="post-intro-card px-5 pt-5">
           <div className="w-full">
-          <img className='rounded-md' src={require(`../../assets/images/${post.image}`)} alt={post.title} />
+          <img className='rounded-md' src={`https://server.yamorz.top/image/${post.image}`} alt={post.title} />
           </div>
           <div><Tags tags={JSON.parse(post.tags.toLowerCase())} /></div>
           <h2  className='text-xl font-semibold'>{post.title}</h2>

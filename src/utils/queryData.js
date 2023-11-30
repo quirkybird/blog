@@ -84,3 +84,11 @@ export const GET_MESSAGE_STACK = gql`
   }
   }
 `
+
+export const CREATE_NEW_POST = gql`
+  mutation CreateNewPost($post: UploadPost!) {
+    createNewPost(post: $post) {
+      message
+    }
+  }
+`

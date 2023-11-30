@@ -5,6 +5,7 @@ const {
   getFriendLinks,
   createMessage,
   getMessageStack,
+  createNewPost,
   } = require("../../src/service/root.service")
 const fs = require("fs")
 const path = require("path")
@@ -19,7 +20,8 @@ module.exports = {
       messageStack: async () => await getMessageStack(),
     }, 
     Mutation: {
-      createMessage: async (_parent, _args) => await createMessage(_args.message)
+      createMessage: async (_parent, _args) => await createMessage(_args.message),
+      createNewPost: async (_parent, _args) => await createNewPost(_args.post)
     }
   },
   schema: fs.readFileSync(
