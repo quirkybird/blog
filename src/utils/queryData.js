@@ -24,6 +24,7 @@ export const GET_ALL_POSTS = gql`
         title
         date
         categories
+        create_at
       }
     }
     `

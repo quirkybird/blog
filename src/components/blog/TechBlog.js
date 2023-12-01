@@ -12,7 +12,7 @@ const TechBlog = ({ blog }) => {
         </section>
         {/* markdown组件，传入数据可以直接按照markdow渲染 */}
         <Mkd markdown={blog.content} />
-        <span>更新时间：{formatDate(blog.update_at)}</span>
+        <span className="px-5">更新时间：{formatDate(blog.update_at)}</span>
       </article>
     </main>
   );

@@ -59,7 +59,7 @@ const NewBlog = () => {
           <button className="bg-blue-500 rounded-md text-white p-1">我要发布文章</button>
         </form>
         <div className="text-6xl">{ loading && "正在上传文章" }</div>
-        <div className="text-6xl">{ data && data.createNewPost.message }，文章发表成功</div>
+        <div className="text-6xl">{ data && data.createNewPost.message + ",文章发表成功"}</div>
       </section>
     </main>
   );

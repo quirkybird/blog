@@ -1,7 +1,7 @@
 const Tags = ({ tags }) => {
   const selectColor = (tag) => {
     let color = "";
-    switch (tag) {
+    switch (tag.toLowerCase()) {
       case "tailwindcss":
         color = "#62BAF2";
         break;
@@ -23,8 +23,14 @@ const Tags = ({ tags }) => {
       case "axios":
         color = "#5f22d6";
         break;
+      case "js":
+        color = "#EBD94D";
+        break;
+      case "ts":
+        color = "#3274C0";
+        break;
       default:
-        color = "#ea3323";
+        color = "#B095DA";
     }
     return color;
   };
@@ -34,7 +40,7 @@ const Tags = ({ tags }) => {
           <span 
             key={index} 
             style={{background: selectColor(tag)}}
-            className="inline-block text-white p-0.5 m-1.5 ml-0 rounded-md"
+            className="inline-block text-white p-1 m-1.5 ml-0 rounded-md"
           >{tag}</span>
         ))
       }

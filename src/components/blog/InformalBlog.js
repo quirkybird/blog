@@ -15,7 +15,7 @@ const InformalBlog = ({blog}) => {
         <div className= {`rounded-md ${shadowInfo} my-5 bg-white`}>
         <Mkd markdown={blog.content} />
         </div>
-        <span>更新时间：{formatDate(blog.update_at)}</span>
+        <span className="px-5">更新时间：{formatDate(blog.update_at)}</span>
       </article>
     </main>
    );
