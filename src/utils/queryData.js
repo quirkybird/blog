@@ -6,13 +6,12 @@ export const GET_RECENT_POSTS = gql`
       id
       author
       title
-      date
       categories
       content
       descr
       tags
-      link
       image
+      create_at
     }
   }
 `;
@@ -22,7 +21,6 @@ export const GET_ALL_POSTS = gql`
       allPost {
         id
         title
-        date
         categories
         create_at
       }
@@ -36,7 +34,6 @@ export const GET_POST_DETAIL = gql`
       id
       title
       author
-      date
       categories
       content
       create_at

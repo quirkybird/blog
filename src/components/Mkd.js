@@ -14,7 +14,7 @@ const Mkd = ({ markdown }) => {
   return (
     <section className="prose max-w-none p-5 prose-img:block lg:prose-p:text-[17.6px]
     prose-img:m-auto prose-h2:text-[16px] prose-pre:bg-[#F6F6F6] 
-    lg:prose-pre:text-[18px] prose-pre:text-[13px]">
+    lg:prose-pre:text-[18px] prose-pre:text-[13px] prose-a:text-[#B095DA]">
       <Markdown remarkPlugins={[remarkGfm, emoji]}>{markdown}</Markdown>
     </section>
   );

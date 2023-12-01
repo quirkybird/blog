@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom'
 import Tags from '../Tags'
+import formDate from '../../utils/formatDate';
 const IntroPost = ({post}) => {
   return ( 
     <section>
@@ -11,7 +12,7 @@ const IntroPost = ({post}) => {
           <h2  className='text-xl font-semibold'>{post.title}</h2>
           <div className='text-sm text-gray-500 font-light py-4'> 
             <span>作者: {post.author}</span>
-            <span>  -{post.date}</span>
+            <span>  -{formDate(post.create_at)}</span>
           </div>
           <p className='text-base font-normal mb-4'>{post.descr}</p>
           <span className='text-blue-400'> 

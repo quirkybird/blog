@@ -73,9 +73,7 @@ import deviceTest from "../utils/deviceTest";
         img.style.position = "absolute"
         img.style.cursor = "pointer"
         // 限制最大图片尺寸
-        if(img.width >= 300) {
-          img.width = 300
-        } else if(img.width >= 200) {
+        if(img.width >= 200) {
           img.width = 200
         } else if(img.width >= 100) {
           img.width = 100
