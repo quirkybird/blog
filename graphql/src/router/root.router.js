@@ -27,4 +27,18 @@ router.get("/recentposts", getRecentPosts)
 
 router.post("/upload-image", postUpload, uploadImage)
 
+router.get("/test", (ctx, next) => {
+  const data = () => {
+    const userInfo = []
+    for(let i = 0; i < 100000; i++) {
+      userInfo.push({
+        info: `这是第${i}个数字`
+      })
+    }
+    return JSON.stringify(userInfo)
+  }
+  ctx.set("Content-Type", "application/json")
+  ctx.body = data()
+})
+
 module.exports = router

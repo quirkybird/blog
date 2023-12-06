@@ -7,6 +7,7 @@ import getStaticImg from "../utils/getStaticImg";
 import {Alert} from "antd"
 import Loading from "../components/Loading"
 import deviceTest from "../utils/deviceTest";
+import getCookie from "../utils/getCookie"
   // 全局变量
   // 物理引擎
   const Engine = Matter.Engine;
@@ -227,25 +228,19 @@ export const Input = ({discussRef, engine}) => {
     element.style.top = `${y - element.offsetHeight / 2}px`
     element.style.transform = `rotate(${body.angle}rad)` //rad弧度单位，matter使用弧度角度
   }
-
+  
   useEffect(() => {
     // 设置一个动画帧ID
     let animationId = null
     const input = inputRef.current
 
     const handleKeyDown = async (e) => {
-      let isLeaveMessage = true
       if(e.code === "Enter") {
-        // 使用cookie判断是否有权限留言
-        const cookiesArray = document.cookie.split(";")
-        cookiesArray.forEach((cookie, index) => {
-          cookie = cookie.trim().split("=");
-          if(cookie[0] === "permission") {
-            isLeaveMessage = false
-            window.alert("今天不能再留言了哦,一天留言一次")
-          }
-        })
-        if(isLeaveMessage) {
+        if(getCookie("permission")) {
+          // 使用cookie判断是否有权限留言
+          window.alert("今天不能再留言了哦,一天留言一次")
+          return
+        }
         // 重置一下是否留言成功的值
         setIsSuccess(null)
         //设置一个cookie，用于记录被输入 
@@ -271,12 +266,13 @@ export const Input = ({discussRef, engine}) => {
         setIsSuccess(true);
         // 清空输入框
         setMessage("");
-        // 添加消息到数据库
-        createMessage({
-          variables:{
-           message
-          }
-        })
+        // 添加消息到数据库，三分钟后再添加到数据库
+        // 通过判断添加的cookie：reCall是否存在
+          createMessage({
+            variables:{
+             message
+            }
+          })
         // 添加到物理世界
         Composite.add(engine.world, newBody);
         // 立即执行函数前面的语句必须使用分号（把我坑惨了）
@@ -292,7 +288,7 @@ export const Input = ({discussRef, engine}) => {
         const dateUTC = new Date(0).toUTCString()
         document.cookie = `permission=; expires=${dateUTC}; path=/;`
         }
-        }
+        
       }
     }
 
