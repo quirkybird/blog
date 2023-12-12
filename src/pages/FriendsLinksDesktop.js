@@ -3,7 +3,7 @@ import { GET_FRIEND_LINKS } from "../utils/queryData";
 import { useEffect, useRef, useState, memo } from "react";
 import getRandomNumber from "../utils/random"
 import ufo from "../assets/icon/ufo.svg"
-import Loading from "../components/Loading";
+import Loading from "../components/common/Loading";
 const FriendsLinksDesktop = () => {
   // 获取友链数据
   const { data, error, loading } = useQuery(GET_FRIEND_LINKS);

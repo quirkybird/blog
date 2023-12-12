@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import {GET_POST_DETAIL} from "../utils/queryData"
 import TechBlog from "../components/blog/TechBlog";
 import InformalBlog from "../components/blog/InformalBlog";
-import Loading from "../components/Loading";
+import Loading from "../components/common/Loading";
 
 const BlogDetail = () => {
   // 获取参数

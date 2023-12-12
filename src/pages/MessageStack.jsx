@@ -5,7 +5,7 @@ import { CREATE_MESSAGE, GET_MESSAGE_STACK } from "../utils/queryData"
 import getRandomNumber from "../utils/random";
 import getStaticImg from "../utils/getStaticImg";
 import {Alert} from "antd"
-import Loading from "../components/Loading"
+import Loading from "../components/common/Loading"
 import deviceTest from "../utils/deviceTest";
 import getCookie from "../utils/getCookie"
   // 全局变量

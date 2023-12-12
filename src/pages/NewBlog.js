@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_NEW_POST } from "../utils/queryData";
-import UploadFile from "../components/UploadFile";
+import UploadFile from "../components/common/UploadFile";
 const NewBlog = () => {
   
   const newBlogFormRef = useRef(null)

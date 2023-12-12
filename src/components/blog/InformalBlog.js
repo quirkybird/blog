@@ -1,4 +1,4 @@
-import Mkd from "../Mkd";
+import Mkd from "../common/Mkd";
 import formatDate from "../../utils/formatDate"
 
 const InformalBlog = ({blog}) => {

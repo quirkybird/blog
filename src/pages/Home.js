@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/client";
 import RecentPosts from "../components/home/RecentPosts";
 import { GET_RECENT_POSTS } from "../utils/queryData";
-import Loading from "../components/Loading";
+import Loading from "../components/common/Loading";
 import Profile from "../components/home/Profile";
 import ConcatMe from "../components/home/ConcatMe";
 const Home = () => {
-  
+  // 获取数据
   const { data, loading } = useQuery(GET_RECENT_POSTS);
   if(loading) return <Loading />
   return (

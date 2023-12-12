@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom'
-import Tags from '../Tags'
+import Tags from '../common/Tags'
 import formDate from '../../utils/formatDate';
 const IntroPost = ({post}) => {
   return ( 
