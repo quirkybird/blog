@@ -7,9 +7,7 @@ export default function RouterTracking() {
 
   useEffect(() => {
     console.log(location)
+    console.log(document.title)
   }, [location]);
 
- return (
-  <div></div>
- )
 }
