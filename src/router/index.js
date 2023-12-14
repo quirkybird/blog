@@ -1,5 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../App";
+// 导入用户设备检测函数
 import deviceTest from "../utils/deviceTest";
 import Home from "../pages/Home";
 import Blog from "../pages/Blog";
@@ -32,12 +33,10 @@ const routes = [
       {
         path: "blog",
         element: <Blog />,
-        children: [
-          {
-            path: ":id",
-            element: <BlogDetail />,
-          },
-        ],
+      },
+      {
+        path: "blog/:id",
+        element: <BlogDetail />,
       },
       {
         path: "friendsLinks",
