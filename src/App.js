@@ -1,12 +1,13 @@
 import { useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom"
-// 导入用户设备检测函数
 import Navigation from "./components/common/Navigation";
 import Footer from "./components/common/Footer";
-// import RouterTracking from "./hooks/RouterTracking";
+import usePageView from "./hooks/usePageView"
 function App() {
+  // 插入页面浏览数埋点
+  usePageView()
   return (
-      <div className="App">
+      <div className="App dark:bg-[--bg-dark-theme-color] dark:text-[#fafafa]">
         <Navigation />
         {/* 填充物 */}
         <div className="w-full h-[68.35px] lg:h-[80px]"></div>

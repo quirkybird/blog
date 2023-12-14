@@ -21,6 +21,9 @@
   body {
    @apply bg-[#FCFCFC];
   }
+  :root {
+    --bg-dark-theme-color: #2D373C;
+    }
  /* 定义滑块的宽度 */
  ::-webkit-scrollbar {
   width: 5px;

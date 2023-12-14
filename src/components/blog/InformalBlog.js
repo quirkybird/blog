@@ -12,7 +12,7 @@ const InformalBlog = ({blog}) => {
           <span> | 字数检测：{blog.content.length}</span>
         </section>
         {/* markdown组件，传入数据可以直接按照markdow渲染 */}
-        <div className= {`rounded-md ${shadowInfo} my-5 bg-white`}>
+        <div className= {`rounded-md ${shadowInfo} my-5`}>
         <Mkd markdown={blog.content} />
         </div>
         <span className="px-5">更新时间：{formatDate(blog.update_at)}</span>
