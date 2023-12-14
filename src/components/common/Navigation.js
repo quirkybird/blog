@@ -62,9 +62,9 @@ const Navigation = () => {
   
   return (
       <header className={`fixed left-0 right-0 z-50 ${menuTopShow} transition-all duration-600 ease-in-out`}>
-      <nav className="flex justify-between items-center px-3 lg:px-10 py-5 shadow-sm  relative">
+      <nav className="flex justify-between items-center px-3 lg:px-10 py-5 shadow-sm dark:shadow-[#334155] relative">
           <Link to="/home"><span className="absolute top-[10px] left-[20px]"><img className='w-[46px] lg:w-[60px]' src={require("../../assets/images/logo.webp")} alt="logo" /></span></Link>
-          <ul className={`flex flex-col mr-4 h-[calc(100vh-68.35px)] font-bold  absolute top-[68.35px] dark:bg-[--bg-dark-theme-color] lg:flex-row lg:static lg:items-center lg:h-full ${menuActiveStr} transition-all duration-300 ease-in-out`}>
+          <ul className={`flex flex-col mr-4 h-[calc(100vh-68.35px)] font-bold  absolute top-[68.35px] dark:bg-[--bg-dark-theme-color] bg-white lg:flex-row lg:static lg:items-center lg:h-full ${menuActiveStr} transition-all duration-300 ease-in-out`}>
             {navLinks.map((link, index) => (
             <li className="px-10 py-3 pr-40 text-lg hover:text-blue-300 order-none lg:pr-20 lg:px-0 lg:py-0" key={index} onClick={handleMenuClick}>
               <Link to={link.path} onClick={() => {handleClick(link.title)}}>{link.title}</Link>

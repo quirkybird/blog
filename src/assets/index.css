@@ -10,6 +10,10 @@
   font-family: "SF";
   src: url("../assets//font//sf-pro-icons_regular.woff2") format('woff2');
 }
+@font-face {
+  font-family: "Mono";
+  src: url("../assets/font/RobotoMono-Medium.ttf") format('ttf');
+}
 
 @layer base {
   html{
@@ -20,6 +24,9 @@
   }
   body {
    @apply bg-[#FCFCFC];
+  }
+  pre {
+    font-family: "Mono",system-ui,-apple-system;
   }
   :root {
     --bg-dark-theme-color: #2D373C;
