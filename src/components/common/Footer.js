@@ -27,8 +27,7 @@ export const ThemeButton = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || null)
   useEffect(() => {
     const container = containerRef.current
-    if(theme)
-    switch(theme.current) {
+    switch(theme) {
       case "light": container.children[0].style.color = "#60A5FA"; break;
       case "dark": container.children[1].style.color = "#60A5FA"; break;
       case null: container.children[2].style.color = "#60A5FA"; break;
@@ -43,7 +42,6 @@ export const ThemeButton = () => {
       for(const ele of container.children) {
         ele.style.color = "inherit"
       }
-      btn.style.color = "#60A5FA"
       // 调用函数
       themeSwitch[btnThemeId]()
     }
