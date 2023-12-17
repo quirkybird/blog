@@ -1,12 +1,18 @@
+import { useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import Tags from '../common/Tags'
 import formDate from '../../utils/formatDate';
+import createObserver from "../../utils/lazyLoadingImg"
 const IntroPost = ({post}) => {
+  useEffect(() => {
+    // 执行交叉观察代码
+    createObserver()
+  })
   return ( 
     <section>
         <div className="post-intro-card px-5 pt-5">
           <div className="w-full">
-          <img className='rounded-md' src={`https://server.yamorz.top/image/${post.image}`} alt={post.title} />
+          <img className='rounded-md' data-src={`https://server.yamorz.top/image/${post.image}`} alt={post.title} />
           </div>
           <div><Tags tags={JSON.parse(post.tags)} /></div>
           <h2  className='text-xl font-semibold'>{post.title}</h2>

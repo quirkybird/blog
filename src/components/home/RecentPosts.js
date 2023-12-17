@@ -3,9 +3,10 @@ import { Pagination } from "antd";
 import IntroPost from "./IntroPost";
 
 const RencentPosts = ({name, posts}) => {
-
   const [pageSize] = useState(6)
   const [current, setCurrent] = useState(1)
+  // 设置换页滚动到顶部
+  window.scrollTo(0, 0)
   const paginatedPosts = useMemo(() => {
     const lastIndex = current * pageSize
     const firstIndex = lastIndex - pageSize
@@ -22,7 +23,7 @@ const RencentPosts = ({name, posts}) => {
           </div>
         ))}
     </div>
-    <section>
+    <section className="my-4">
       <Pagination 
         simple 
         pageSize={pageSize}

@@ -5,7 +5,7 @@ const rootService = {
   // 获取最近文章
   getRecentPosts: async () => {
     const sql =
-      "select * from blog_posts order by create_at DESC limit 9 offset 0";
+      "select * from blog_posts order by create_at DESC limit 12 offset 0";
     const [recentPost] = await connection.execute(sql);
     return recentPost;
   },

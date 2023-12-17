@@ -10,7 +10,7 @@ function App() {
       <div className="App dark:bg-[--bg-dark-theme-color] dark:text-[#fafafa]">
         <Navigation />
         {/* 填充物 */}
-        <div className="w-full h-[68.35px] lg:h-[80px]"></div>
+        <div className="h-[68.35px] lg:h-[80px]"></div>
         <Outlet />
         {/* 添加返回顶部按钮 */}
         <BackTop />
