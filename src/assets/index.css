@@ -60,13 +60,13 @@ pre {
   border-left: 5px solid #B9CCDB;
 }
 pre::after {
-  content: var(--code-lang);
+  content: attr(data-after-content);
   position: absolute;
   right: 10px;
   top: 5px;
   display: inline-block;
-  color: aqua;
-  font-size: medium;
+  color: #3559E0;
+  font-size: clamp(12px .4em 16px);
 }
 
 /* 渐变按钮 friendlinks */
