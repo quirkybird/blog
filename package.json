@@ -5,6 +5,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@apollo/client": "^3.8.6",
+    "@giscus/react": "^2.4.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
