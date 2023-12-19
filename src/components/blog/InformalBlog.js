@@ -1,5 +1,6 @@
 import Mkd from "../common/Mkd";
 import formatDate from "../../utils/formatDate"
+import GiscusComment from "../common/GiscusComment";
 
 const InformalBlog = ({blog}) => {
   const shadowInfo = "shadow-[rgba(100,100,111,0.2)_0px_7px_29px_0px]"
@@ -16,6 +17,7 @@ const InformalBlog = ({blog}) => {
         <Mkd markdown={blog.content} />
         </div>
         <span className="px-5">更新时间：{formatDate(blog.update_at)}</span>
+        <GiscusComment />
       </article>
     </main>
    );
