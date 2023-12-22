@@ -1,7 +1,7 @@
 import Giscus from "@giscus/react";
 const GiscusComment = () => {
   return (
-    <section className="w-full">
+    <section className="w-full pt-10 pb-6">
       <Giscus
         src="https://giscus.app/client.js"
         repo="quirkybird/blog-yamorz-giscus"
