@@ -1,18 +1,19 @@
+import { lazy } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../App";
 // 导入用户设备检测函数
 import deviceTest from "../utils/deviceTest";
-import Home from "../pages/Home";
-import Blog from "../pages/Blog";
+const Home = lazy(() => import("../pages/Home"));
+const Blog = lazy(() => import("../pages/Blog"));
 // 桌面端的友链
-import FriendsLinksDesktop from "../pages/FriendsLinksDesktop";
+const FriendsLinksDesktop = lazy(() => import("../pages/FriendsLinksDesktop"));
 // 移动端的友链
-import FriendsLinksPhone from "../pages/FriendsLinksPhone";
-import MessageStack from "../pages/MessageStack";
-import NotFound from "../pages/NotFound";
-import QbMusic from "../pages/Music";
-import BlogDetail from "../pages/BlogDetail";
-import NewBlog from "../pages/NewBlog";
+const FriendsLinksPhone = lazy(() => import("../pages/FriendsLinksPhone"));
+const MessageStack = lazy(() => import("../pages/MessageStack"));
+const NotFound = lazy(() => import("../pages/NotFound"));
+const QbMusic = lazy(() => import("../pages/Music"));
+const BlogDetail = lazy(() => import("../pages/BlogDetail"));
+const NewBlog = lazy(() => import("../pages/NewBlog"));
 
 // 用户设备判断
 let boo_user = null;

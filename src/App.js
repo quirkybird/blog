@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, Suspense } from "react";
 import { Outlet } from "react-router-dom"
+import Loading from "./components/common/Loading"
 import Navigation from "./components/common/Navigation";
 import Footer from "./components/common/Footer";
 import usePageView from "./hooks/usePageView"
@@ -11,7 +12,9 @@ function App() {
         <Navigation />
         {/* 填充物 */}
         <div className="h-[68.35px] lg:h-[80px]"></div>
-        <Outlet />
+        <Suspense fallback = {<Loading />} >
+          <Outlet />
+        </Suspense>
         {/* 添加返回顶部按钮 */}
         <BackTop />
         {/* 添加页脚  */}
