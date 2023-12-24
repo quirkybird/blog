@@ -7,7 +7,6 @@ export const GET_RECENT_POSTS = gql`
       author
       title
       categories
-      content
       descr
       tags
       image
