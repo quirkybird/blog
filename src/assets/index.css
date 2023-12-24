@@ -53,8 +53,8 @@
   background-color: #555; /* 设置滑块背景色 */
 }
 
-pre code {
-  @apply dark:bg-[#1e293b];
+.hljs {
+  @apply dark:!bg-[#1e293b] !bg-[#F2F5F7] !text-[black] dark:!text-[#ffffff];
 }
 /* 设置行内代码块样式 */
 p code{

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import PoweredByVercel from "powered-by-vercel";
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState, useContext, startTransition } from "react";
 import { ThemeContext } from "../../App";
 const Footer = () => {
   return (
@@ -55,10 +55,14 @@ export const ThemeButton = () => {
 
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark')
-      setThemeMode("dark")
+      startTransition(() => {
+        setThemeMode("dark")
+      })
     } else {
       document.documentElement.classList.remove('dark')
-      setThemeMode("light")
+      startTransition(() => {
+        setThemeMode("light")
+      })
     }
 
     return () => {
