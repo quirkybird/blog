@@ -15,7 +15,6 @@
   src: url("../assets/font/RobotoMono-Medium.ttf") format('ttf');
 }
 
-@layer base {
   html{
    font-family: "SourceHanSansCN", system-ui,-apple-system,PingFang SC,"Microsoft YaHei",Segoe UI,Roboto,Helvetica,noto sans sc,hiragino sans gb,"sans-serif",Apple Color Emoji,Segoe UI Emoji,Not Color Emoji
   }
@@ -29,6 +28,7 @@
   pre {
     font-family: "Mono",system-ui,-apple-system;
   }
+
   :root {
     --bg-dark-theme-color: #2D373C;
     }
@@ -52,6 +52,24 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: #555; /* 设置滑块背景色 */
 }
+
+pre code {
+  @apply dark:bg-[#1e293b];
+}
+/* 设置行内代码块样式 */
+p code{
+  @apply dark:bg-[#0284c7];
+  background-color: #bae6fd;
+  display: inline-block;
+  border-radius: 4px;
+  padding: .5px 2px;
+  margin: 0 2px;
+  }
+p code::before,
+p code::after{
+  content: "";
+  display: none;
+  height: 0;
 }
 
 /* 设置代码块左侧样式 */

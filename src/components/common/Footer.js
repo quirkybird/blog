@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import PoweredByVercel from "powered-by-vercel";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
+import { ThemeContext } from "../../App";
 const Footer = () => {
   return (
     <footer className="p-5 w-full shadow-[rgba(0,0,0,0.1)_0px_10px_50px]">
@@ -25,8 +26,16 @@ const Footer = () => {
 export const ThemeButton = () => {
   const containerRef = useRef(null)
   const [theme, setTheme] = useState(localStorage.getItem("theme") || null)
+
+  // 创建接受上下文的useContext
+  const setThemeMode = useContext(ThemeContext)
+
   useEffect(() => {
     const container = containerRef.current
+    // 去除所有样式
+    for(const ele of container.children) {
+      ele.style.color = "inherit"
+    }
     switch(theme) {
       case "light": container.children[0].style.color = "#60A5FA"; break;
       case "dark": container.children[1].style.color = "#60A5FA"; break;
@@ -39,9 +48,6 @@ export const ThemeButton = () => {
       const btn = e.target.closest('span')
       const btnThemeId = btn.dataset.themeId
       if(!btn) return
-      for(const ele of container.children) {
-        ele.style.color = "inherit"
-      }
       // 调用函数
       themeSwitch[btnThemeId]()
     }
@@ -49,8 +55,10 @@ export const ThemeButton = () => {
 
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark')
+      setThemeMode("dark")
     } else {
       document.documentElement.classList.remove('dark')
+      setThemeMode("light")
     }
 
     return () => {
