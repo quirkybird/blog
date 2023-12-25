@@ -25,8 +25,7 @@ const Mkd = ({ markdown }) => {
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      left: 0,
-      behavior: "smooth"
+      left: 0
     })
     hljs.highlightAll();
 
