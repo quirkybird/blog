@@ -17,10 +17,6 @@ const Navigation = () => {
       path: "/friendsLinks",
     },
     {
-      title: "播放器",
-      path: "/qbmusic"
-    },
-    {
       title: "留言堆",
       path: "/messagestack"
     }

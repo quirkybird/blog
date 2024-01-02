@@ -11,7 +11,6 @@ const FriendsLinksDesktop = lazy(() => import("../pages/FriendsLinksDesktop"));
 const FriendsLinksPhone = lazy(() => import("../pages/FriendsLinksPhone"));
 const MessageStack = lazy(() => import("../pages/MessageStack"));
 const NotFound = lazy(() => import("../pages/NotFound"));
-const QbMusic = lazy(() => import("../pages/Music"));
 const BlogDetail = lazy(() => import("../pages/BlogDetail"));
 const NewBlog = lazy(() => import("../pages/NewBlog"));
 
@@ -42,10 +41,6 @@ const routes = [
       {
         path: "friendsLinks",
         element: boo_user ? <FriendsLinksPhone /> : <FriendsLinksDesktop />,
-      },
-      {
-        path: "qbmusic",
-        element: <QbMusic />,
       },
       {
         path: "messagestack",
