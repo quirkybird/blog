@@ -7,7 +7,7 @@ import 'animate.css' //导入动画库
 import {ApolloClient, InMemoryCache, ApolloProvider} from "@apollo/client"
 
 const client = new ApolloClient({
-  // uri: "http://localhost:80",
+  // uri: "http://localhost:80/graphql",
   uri: "https://server.yamorz.top/",
   cache: new InMemoryCache()
 })
