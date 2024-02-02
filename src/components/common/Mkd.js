@@ -51,7 +51,7 @@ const Mkd = ({ markdown }) => {
   return (
     <section
       className="prose max-w-none p-8 prose-img:block prose-p:text-[14px] lg:prose-p:text-[15px]
-    prose-img:m-auto  prose-pre:text-[14px]
+    prose-img:m-auto prose-img:shadow-xl prose-img:rounded-md prose-pre:text-[14px]
      prose-a:text-[#B095DA] dark:prose-invert dark:prose-pre:bg-[#1e293b] prose-pre:bg-[#F2F5F7]"
     >
       <Markdown
