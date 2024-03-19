@@ -8,22 +8,27 @@ const FriendsLinksDesktop = () => {
   // 获取友链数据
   const { data, error, loading } = useQuery(GET_FRIEND_LINKS);
   if (loading) return <Loading />;
-  if (error) return error;
+  // if (error) return error;
 
   // 随机友链
-  const randomNumber = getRandomNumber(0, data.friendlinks.length - 1)
-  const friendlink = data.friendlinks[randomNumber];
+  const randomNumber = getRandomNumber(0, data?.friendlinks.length - 1)
+  const friendlink = data?.friendlinks[randomNumber];
   // 定义主题颜色
-  const themeColor = friendlink.theme_color
+  const themeColor = friendlink?.theme_color
   // 所有数据
-  const friendlinks = data.friendlinks;
+  const friendlinks = data?.friendlinks;
   return (
-    <main className="bg-black min-h-[calc(100vh-80px)]">
+     (<main className="bg-black min-h-[calc(100vh-80px)]">
       <section className="w-full m-auto lg:w-[70vw] text-white">
+        {data || <h1>很遗憾，数据跑丢了，下次再来</h1>}
+        {data && <>
         <RandomWebsite friendlink = {friendlink} themeColor = {themeColor} />
         <FriendCard friendlinks = {friendlinks} />
+        </> }
+   
       </section>
-    </main>
+    </main>)
+    
   );
 };
 // 随机网站

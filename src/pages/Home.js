@@ -12,6 +12,7 @@ const Home = () => {
     <main className="w-full min-h-[100vh] m-auto lg:w-[70vw] py-5">
      <ConcatMe />
       <Profile />
+      {data || <h1>很遗憾，数据跑丢了，下次再来</h1>}
       {data && <RecentPosts name="近期文章" posts={data.recentPost} />}
     </main>
   );

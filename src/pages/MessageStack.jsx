@@ -90,17 +90,9 @@ import getCookie from "../utils/getCookie"
       }
     })
  }
-// 设置一个最高层组件来获取数据，往下传递
 const MessageStack = () => {
-  // 获取留言堆数据
+    // 获取留言堆数据
   const { data, error, loading } = useQuery(GET_MESSAGE_STACK)
-  if(loading) return <Loading />
-  return (
-    <Discuss messages = {data.messageStack} />
-  )
-}
-
-export const Discuss = ({ messages }) => {
   const discussRef = useRef(null);
   const animationId = useRef(null);
   // 创建引擎
@@ -115,7 +107,7 @@ export const Discuss = ({ messages }) => {
   // engine.gravity.y = 0
   // 渲染函数
   const render = (bubbles) => {
-    bubbles.forEach(async (bubble, index) => {
+    bubbles?.forEach(async (bubble, index) => {
     const fullfilledBubble = await bubble
     if(!fullfilledBubble) return
     const element = fullfilledBubble.text
@@ -133,7 +125,7 @@ export const Discuss = ({ messages }) => {
     // 矩形参数为x, y, w, h(x, y为元素中心点位置)
     let text = null
     let body = null
-    const bubbles = messages.map(async (messageObject, index) => {
+    const bubbles = data?.MessageStack.map(async (messageObject, index) => {
         if(deviceTest() === "desktop" && (messageObject.message.includes("https://") || messageObject.message.includes("http://"))) {
         const {img, body: newBody} = await createImgMessage(discussRef.current, messageObject.message)
           text = img
@@ -195,9 +187,11 @@ export const Discuss = ({ messages }) => {
     }
     })
 
+  if(loading) return <Loading />
   return (
     <main className="min-h-[calc(100vh-80px)] relative overflow-hidden">
-      <Input discussRef={discussRef} engine={engine} />
+        {data || <h1>很遗憾，数据跑丢了，下次再来</h1>}        
+        {data && <Input discussRef={discussRef} engine={engine} />}        
       <div ref={discussRef} className="w-full h-[calc(100vh-80px)] relative"></div>
     </main>
   )
