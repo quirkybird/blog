@@ -16,7 +16,6 @@ const Blog = () => {
         <span className="inline-block w-full h-[1px] bg-gray-300 my-8"></span>
       </section>
       <section>
-        {data || <h1>很遗憾，数据跑丢了，下次再来</h1>}
         { data && <BlogList posts={data?.allPost} />}
       </section>
     </article>

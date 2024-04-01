@@ -20,7 +20,6 @@ const FriendsLinksDesktop = () => {
   return (
      (<main className="bg-black min-h-[calc(100vh-80px)]">
       <section className="w-full m-auto lg:w-[70vw] text-white">
-        {data || <h1>很遗憾，数据跑丢了，下次再来</h1>}
         {data && <>
         <RandomWebsite friendlink = {friendlink} themeColor = {themeColor} />
         <FriendCard friendlinks = {friendlinks} />
