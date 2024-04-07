@@ -56,11 +56,13 @@ export const ThemeButton = () => {
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark')
       startTransition(() => {
+        document.documentElement.style.filter = 'brightness(85%)'
         setThemeMode("dark")
       })
     } else {
       document.documentElement.classList.remove('dark')
       startTransition(() => {
+        document.documentElement.style.filter = ''
         setThemeMode("light")
       })
     }
