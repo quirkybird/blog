@@ -14,7 +14,9 @@ const IntroPost = ({post}) => {
           <div className="w-full">
           <img className='rounded-md' data-src={`https://server.yamorz.top/image/${post.image}`} alt={post.title} />
           </div>
-          <div><Tags tags={JSON.parse(post.tags)} /></div>
+          <div className='p-1 m-1.5 ml-0'>
+            {/* <Tags tags={JSON.parse(post.tags)} /> */}
+            </div>
           <h2  className='text-xl font-semibold'>{post.title}</h2>
           <div className='text-sm text-gray-500 font-light py-4'> 
             <span>作者: {post.author}</span>
