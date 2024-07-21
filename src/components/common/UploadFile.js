@@ -36,22 +36,34 @@ const UploadFile = ({ uploadRef, getFileName }) => {
         console.log(urls, '--urls');
 
         //把url交给服务器处理，返回替换url后的链接
-        urls.length !== 0 &&
-          (await fetch('http://localhost:80/replace', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              urls,
-            }),
-          })
-            .then((res) => res.json())
-            .then((data) =>
-              content.replace(regex, (match, p1) => {
-                return data.list[index++];
-              })
-            ));
+        const replacedUrls = await fetch('https://server.yamorz.top/replace', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            urls,
+          }),
+        }).then((res) => res.json());
+
+        console.log(replacedUrls, '---res');
+
+        const newContent = content.replace(regex, (match, p1) => {
+          return replacedUrls[index++];
+        });
+
+        const modifiedBlob = new Blob([newContent]);
+        const modifiedFile = new File([modifiedBlob], mdfile.name);
+
+        formData.append('image', imgfile);
+        formData.append('markdown', modifiedFile);
+        const res = await fetch('https://server.yamorz.top/upload-image', {
+          method: 'POST',
+          body: formData,
+        });
+        const data = await res.json();
+        // 将使用回调函数，传回响应值
+        getFileName(data);
       };
 
       // 读取为文本文件
@@ -60,16 +72,6 @@ const UploadFile = ({ uploadRef, getFileName }) => {
       // await new Promise((resolve, reject) => {
       //   setTimeout(() => resolve(), 100000000);
       // });
-
-      formData.append('image', imgfile);
-      formData.append('markdown', mdfile);
-      const res = await fetch('https://server.yamorz.top/upload-image', {
-        method: 'POST',
-        body: formData,
-      });
-      const data = await res.json();
-      // 将使用回调函数，传回响应值
-      getFileName(data);
     };
     upload.addEventListener('submit', handleUploadFile);
     return () => {
