@@ -49,7 +49,7 @@ const UploadFile = ({ uploadRef, getFileName }) => {
         console.log(replacedUrls, '---res');
 
         const newContent = content.replace(regex, (match, p1) => {
-          return replacedUrls[index++];
+          return match.replace(p1, replacedUrls[index++]);
         });
 
         const modifiedBlob = new Blob([newContent]);
