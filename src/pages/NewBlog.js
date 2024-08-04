@@ -90,7 +90,7 @@ const NewBlog = () => {
           {data && data.createNewPost.message + ',文章发表成功'}
         </div>
       </section>
-      <section className="flex-[2_2_0%]">
+      <section className="flex-[2_2_0%] overflow-auto">
         <Mkd markdown={content} />
       </section>
     </main>
