@@ -1,8 +1,25 @@
 import { useEffect, useRef } from 'react';
 
-const UploadFile = ({ uploadRef, getFileName }) => {
+const UploadFile = ({ uploadRef, getFileName, getMkdContent }) => {
   const imgFileInput = useRef(null);
   const mdFileInput = useRef(null);
+
+  // 文件发生变化进行文件读取展示
+  const onPostChange = () => {
+    const mdInputRef = mdFileInput.current;
+    const mdfile = mdInputRef.files[0];
+
+    // 新建 FileReader 对象
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const content = e.target.result;
+      // 调用回调函数，传回文章内容
+      getMkdContent(content);
+    };
+    // 读取为文本文件
+    reader.readAsText(mdfile);
+  };
+
   useEffect(() => {
     const imgInputRef = imgFileInput.current;
     const mdInputRef = mdFileInput.current;
@@ -81,7 +98,7 @@ const UploadFile = ({ uploadRef, getFileName }) => {
   return (
     <div>
       <label>上传文章内容</label>
-      <input type="file" ref={mdFileInput} required />
+      <input type="file" ref={mdFileInput} onChange={onPostChange} required />
       <br />
       <label> 上传文章封面 </label>
       <input type="file" ref={imgFileInput} required />

@@ -1,9 +1,11 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CREATE_NEW_POST } from '../utils/queryData';
 import UploadFile from '../components/common/UploadFile';
+import Mkd from '../components/common/Mkd';
 const NewBlog = () => {
   const newBlogFormRef = useRef(null);
+  const [content, setContent] = useState('');
 
   // 使用apollo/client hooks
   const [createNewPost, { data, loading }] = useMutation(CREATE_NEW_POST);
@@ -28,9 +30,14 @@ const NewBlog = () => {
     });
   };
 
+  //返回最新的content，用来预览内容
+  const getMkdContent = (c) => {
+    setContent(c);
+  };
+
   return (
-    <main className="min-h-[calc(100vh-80px)]">
-      <section className="max-w-[900] sm:w-[60vw] m-auto">
+    <main className="min-h-[calc(100vh-80px)] flex">
+      <section className="flex-1">
         <form ref={newBlogFormRef}>
           <div>
             <label htmlFor="title">标题</label>
@@ -68,7 +75,11 @@ const NewBlog = () => {
             <input id="tags" name="tags" type="text" placeholder="请选择类别" />
           </div>
           <div>
-            <UploadFile uploadRef={newBlogFormRef} getFileName={getFileName} />
+            <UploadFile
+              uploadRef={newBlogFormRef}
+              getFileName={getFileName}
+              getMkdContent={getMkdContent}
+            />
           </div>
           <button className="bg-blue-500 rounded-md text-white p-1">
             我要发布文章
@@ -78,6 +89,9 @@ const NewBlog = () => {
         <div className="text-6xl">
           {data && data.createNewPost.message + ',文章发表成功'}
         </div>
+      </section>
+      <section className="flex-[2_2_0%]">
+        <Mkd markdown={content} />
       </section>
     </main>
   );

@@ -47,12 +47,12 @@ const Mkd = ({ markdown }) => {
       // 先给他们设置上数据属性
       codeBlocks[index].dataset.afterContent = langList.current[index];
     }
-  }, [theme]);
+  }, [theme, markdown]);
   return (
     <section
       className="prose max-w-none p-8 prose-img:block prose-p:text-[14px] lg:prose-p:text-[15px]
     prose-img:m-auto prose-img:shadow prose-img:rounded-md prose-pre:text-[14px] prose-blockquote:break-all
-     prose-a:text-[#B095DA] dark:prose-invert dark:prose-pre:bg-[#1e293b] prose-pre:bg-[#F2F5F7]"
+     prose-a:text-[#3bb0f0] dark:prose-invert dark:prose-pre:bg-[#1e293b] prose-pre:bg-[#F2F5F7]"
     >
       <Markdown
         remarkPlugins={[remarkGfm, emoji]}
