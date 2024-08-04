@@ -33,11 +33,11 @@ const Mkd = ({ markdown }) => {
     // 实现效果很不理想，不知道如何解决
     if (theme === 'light') {
       (async () => {
-        await import('highlight.js/styles/stackoverflow-light.css');
+        await import('highlight.js/styles/atom-one-light.min.css');
       })();
     } else {
       (async () => {
-        await import('highlight.js/styles/stackoverflow-dark.css');
+        await import('highlight.js/styles/atom-one-dark.min.css');
       })();
     }
 

@@ -3,41 +3,49 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "SourceHanSansCN";
-  src: url("./font//SourceHanSansSC.woff2") format('opentype');
+  font-family: 'SourceHanSansCN';
+  src: url('./font//SourceHanSansSC.woff2') format('opentype');
 }
 @font-face {
-  font-family: "SF";
-  src: url("../assets//font//sf-pro-icons_regular.woff2") format('woff2');
+  font-family: 'SF';
+  src: url('../assets//font//sf-pro-icons_regular.woff2') format('woff2');
 }
 @font-face {
-  font-family: "Mono";
-  src: url("../assets/font/RobotoMono-Medium.ttf") format('ttf');
+  font-family: 'Mono';
+  src: url('../assets/font/RobotoMono-Medium.ttf') format('ttf');
 }
 
-  html{
-   font-family: "SourceHanSansCN", system-ui,-apple-system,PingFang SC,"Microsoft YaHei",Segoe UI,Roboto,Helvetica,noto sans sc,hiragino sans gb,"sans-serif",Apple Color Emoji,Segoe UI Emoji,Not Color Emoji
-  }
-  /* 设置代码的字体 */
-  .intro {
-    font-family: "SF", system-ui;
-  }
-  body {
-   @apply bg-[#FCFCFC];
-  }
-  pre {
-    font-family: "Mono",system-ui,-apple-system;
-  }
+@font-face {
+  font-family: 'FiraCode';
+  src: url('./font/FiraCode-Regular.woff2') format('woff2');
+}
 
-  :root {
-    --bg-dark-theme-color: #2D373C;
-    }
- /* 定义滑块的宽度 */
- ::-webkit-scrollbar {
+html {
+  font-family: 'SourceHanSansCN', system-ui, -apple-system, PingFang SC,
+    'Microsoft YaHei', Segoe UI, Roboto, Helvetica, noto sans sc,
+    hiragino sans gb, 'sans-serif', Apple Color Emoji, Segoe UI Emoji,
+    Not Color Emoji;
+}
+/* 设置代码的字体 */
+.intro {
+  font-family: 'SF', system-ui;
+}
+body {
+  @apply bg-[#FCFCFC];
+}
+pre {
+  font-family: 'FiraCode', system-ui, -apple-system;
+}
+
+:root {
+  --bg-dark-theme-color: #2d373c;
+}
+/* 定义滑块的宽度 */
+::-webkit-scrollbar {
   width: 5px;
   height: 10%;
- }
- /* 定义滚动条轨道的样式 */
+}
+/* 定义滚动条轨道的样式 */
 ::-webkit-scrollbar-track {
   background-color: #f1f1f1; /* 设置轨道背景色 */
 }
@@ -57,17 +65,17 @@
   @apply dark:!bg-[#1e293b] !bg-[#F2F5F7] !text-[black] dark:!text-[#ffffff];
 }
 /* 设置行内代码块样式 */
-p code{
+p code {
   @apply dark:bg-[#0284c7];
   background-color: #bae6fd;
   display: inline-block;
   border-radius: 4px;
-  padding: .5px 2px;
+  padding: 0.5px 2px;
   margin: 0 2px;
-  }
+}
 p code::before,
-p code::after{
-  content: "";
+p code::after {
+  content: '';
   display: none;
   height: 0;
 }
@@ -75,7 +83,7 @@ p code::after{
 /* 设置代码块左侧样式 */
 pre {
   position: relative;
-  border-left: 5px solid #B9CCDB;
+  border-left: 5px solid #b9ccdb;
 }
 pre::after {
   content: attr(data-after-content);
@@ -83,20 +91,30 @@ pre::after {
   right: 10px;
   top: 5px;
   display: inline-block;
-  color: #3559E0;
-  font-size: clamp(12px .4em 16px);
+  color: #3559e0;
+  font-size: clamp(12px 0.4em 16px);
 }
 
 /* 渐变按钮 friendlinks */
 .btn-grad {
-  background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
-  background-blend-mode: multiply,multiply;
+  background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(0, 0, 0, 0.15) 100%
+    ),
+    radial-gradient(
+        at top center,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(0, 0, 0, 0.4) 120%
+      )
+      #989898;
+  background-blend-mode: multiply, multiply;
   padding: 15px 45px;
   text-align: center;
   text-transform: uppercase;
   transition: 0.5s;
   background-size: 200% auto;
-  color: white;            
+  color: white;
   box-shadow: 0 0 20px #eee;
   border-radius: 10px;
   display: block;
@@ -105,7 +123,7 @@ pre::after {
 .btn-grad:hover {
   user-select: none;
   cursor: pointer;
-  background-position: right center; 
+  background-position: right center;
   text-decoration: none;
 }
 
@@ -114,16 +132,15 @@ pre::after {
   --animate-duration: 1s;
 }
 
-
 /* 气泡样式 messagestack */
 .bubble {
-  width: 200px; 
-  height: 60px; 
+  width: 200px;
+  height: 60px;
   line-height: 60px;
   text-align: left;
   padding-left: 10px;
-  border-radius: 20px; 
-  user-select: none; 
+  border-radius: 20px;
+  user-select: none;
   position: absolute;
   cursor: pointer;
 }
@@ -132,7 +149,7 @@ pre::after {
   position: absolute;
   left: 20px;
   bottom: -18px;
-  content: "";
+  content: '';
   width: 0;
   height: 0;
   border-left: 10px solid transparent;
