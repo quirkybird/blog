@@ -1,57 +1,57 @@
-import { lazy } from "react";
-import { createBrowserRouter, Navigate } from "react-router-dom";
-import App from "../App";
+import { lazy } from 'react';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
+import App from '../App';
 // 导入用户设备检测函数
-import deviceTest from "../utils/deviceTest";
-const Home = lazy(() => import("../pages/Home"));
-const Blog = lazy(() => import("../pages/Blog"));
+import deviceTest from '../utils/deviceTest';
+const Home = lazy(() => import('../pages/Home'));
+const Blog = lazy(() => import('../pages/Blog'));
 // 桌面端的友链
-const FriendsLinksDesktop = lazy(() => import("../pages/FriendsLinksDesktop"));
+const FriendsLinksDesktop = lazy(() => import('../pages/FriendsLinksDesktop'));
 // 移动端的友链
-const FriendsLinksPhone = lazy(() => import("../pages/FriendsLinksPhone"));
-const MessageStack = lazy(() => import("../pages/MessageStack"));
-const NotFound = lazy(() => import("../pages/NotFound"));
-const BlogDetail = lazy(() => import("../pages/BlogDetail"));
-const NewBlog = lazy(() => import("../pages/NewBlog"));
+const FriendsLinksPhone = lazy(() => import('../pages/FriendsLinksPhone'));
+const MessageStack = lazy(() => import('../pages/MessageStack'));
+const NotFound = lazy(() => import('../pages/NotFound'));
+const BlogDetail = lazy(() => import('../pages/BlogDetail'));
+const NewBlog = lazy(() => import('../pages/NewBlog'));
 
 // 用户设备判断
 let boo_user = null;
 const deviceType = deviceTest();
-if (deviceType === "mobile") boo_user = true;
-if (deviceType === "desktop") boo_user = false;
+if (deviceType === 'mobile') boo_user = true;
+if (deviceType === 'desktop') boo_user = false;
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
       { index: true, element: <Navigate to="/home" /> }, // 设置 index 属性来重定向到 /home
       {
-        path: "home",
+        path: 'home',
         element: <Home />,
       },
       {
-        path: "blog",
+        path: 'blog',
         element: <Blog />,
       },
       {
-        path: "blog/:id",
+        path: 'blog/:id',
         element: <BlogDetail />,
       },
       {
-        path: "friendsLinks",
+        path: 'friendsLinks',
         element: boo_user ? <FriendsLinksPhone /> : <FriendsLinksDesktop />,
       },
+      // {
+      //   path: "messagestack",
+      //   element: <MessageStack />,
+      // },
       {
-        path: "messagestack",
-        element: <MessageStack />,
-      },
-      {
-        path: "injectnewblog",
+        path: 'injectnewblog',
         element: <NewBlog />,
       },
       {
-        path: "*",
+        path: '*',
         element: <NotFound />,
       },
     ],
