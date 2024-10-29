@@ -4,6 +4,7 @@ const BASE_URL = 'https://blog.yamorz.top';
 export async function getAllPosts() {
   const raw = await fetch(`${BASE_URL}/aJson.json`);
   const res = await raw.json();
+  res.article.reverse();
   return res;
 }
 
